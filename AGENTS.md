@@ -1,6 +1,6 @@
-# AGENTS.md - Antigravity Guidelines: Tờ Tờ Quán (Tâm Hương Quán)
+# AGENTS.md - Antigravity Guidelines: Tờ Tờ Quán (Tờ Tờ Quán)
 
-> Tài liệu hướng dẫn phát triển, kiến trúc và quy chuẩn thiết kế dành cho AI Agents (Antigravity) khi làm việc trên dự án **Tờ Tờ Quán** (còn gọi là *Tâm Hương Quán*).
+> Tài liệu hướng dẫn phát triển, kiến trúc và quy chuẩn thiết kế dành cho AI Agents (Antigravity) khi làm việc trên dự án **Tờ Tờ Quán** (còn gọi là *Tờ Tờ Quán*).
 
 ---
 
