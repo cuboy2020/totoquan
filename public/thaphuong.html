@@ -1,0 +1,2090 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Thắp Hương & Bốc Quẻ Tịnh Tâm - Cõi Trời Thiên Cung</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #060507;
+      --gold: #d4af37;
+      --gold-bright: #ffeaa7;
+      --gold-glow: rgba(212, 175, 55, 0.28);
+      --text: #eae6de;
+      --text-dim: #9e978a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', serif;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* 1. NỀN THIÊN ĐÌNH */
+    .heaven-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background: radial-gradient(circle at 50% 15%, #241938 0%, #110d1c 45%, #060508 85%);
+      overflow: hidden;
+      contain: strict;
+    }
+
+    .heaven-palace {
+      position: absolute;
+      top: 2%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: clamp(320px, 60vw, 580px);
+      height: auto;
+      opacity: 0.38;
+      filter: drop-shadow(0 0 15px rgba(241, 196, 15, 0.3));
+    }
+
+    .cloud-layer {
+      position: absolute;
+      width: 220%;
+      height: 180px;
+      pointer-events: none;
+    }
+
+    .cloud-back {
+      bottom: 24%;
+      left: -20%;
+      opacity: 0.25;
+      background: radial-gradient(ellipse at 50% 100%, rgba(220, 200, 255, 0.35) 0%, rgba(180, 160, 230, 0.1) 50%, transparent 80%);
+      animation: driftClouds 55s linear infinite alternate;
+    }
+
+    .cloud-front {
+      bottom: 0;
+      left: -10%;
+      width: 220%;
+      height: 220px;
+      opacity: 0.28;
+      background: radial-gradient(ellipse at 50% 100%, rgba(255, 240, 210, 0.4) 0%, rgba(240, 210, 160, 0.1) 45%, transparent 75%);
+      animation: driftClouds 40s linear infinite alternate-reverse;
+    }
+
+    @keyframes driftClouds {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-15%); }
+    }
+
+    .celestial-pillar {
+      position: absolute;
+      bottom: 0;
+      width: clamp(25px, 4vw, 45px);
+      height: 65%;
+      opacity: 0.22;
+      background: linear-gradient(to top, rgba(212, 175, 55, 0.4), rgba(212, 175, 55, 0.05));
+      border: 1px solid rgba(212, 175, 55, 0.25);
+    }
+
+    .pillar-left { left: 16px; border-radius: 8px 8px 0 0; }
+    .pillar-right { right: 16px; border-radius: 8px 8px 0 0; }
+
+    #petalCanvas, #fxCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    #petalCanvas { z-index: 2; }
+    #fxCanvas { z-index: 6; }
+
+    /* 2. NHÂN VẬT THẦN TIÊN BAY LƯỢN */
+    .buddha-realm {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+      contain: layout paint;
+    }
+
+    .divine-figure {
+      position: absolute;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.25s ease;
+      will-change: transform;
+    }
+
+    .divine-figure:hover {
+      transform: scale(1.12);
+    }
+
+    #buddha {
+      top: 3%;
+      left: -200px;
+      width: 135px;
+      height: 135px;
+      animation: flyLoopA 32s linear infinite, bobbleA 4s ease-in-out infinite alternate;
+    }
+
+    #guanyin {
+      top: 7%;
+      right: -190px;
+      width: 110px;
+      height: 130px;
+      animation: flyLoopB 28s linear infinite 4s, bobbleB 3.6s ease-in-out infinite alternate;
+    }
+
+    #jadeEmperor {
+      top: 9%;
+      left: -190px;
+      width: 115px;
+      height: 130px;
+      animation: flyLoopA 30s linear infinite 12s, bobbleA 3.8s ease-in-out infinite alternate;
+    }
+
+    #tripitaka {
+      top: 18%;
+      left: -160px;
+      width: 95px;
+      height: 90px;
+      animation: flyLoopA 25s linear infinite 2s, bobbleA 3s ease-in-out infinite alternate;
+    }
+
+    #dragonHorse {
+      top: 21%;
+      left: -290px;
+      width: 95px;
+      height: 85px;
+      animation: flyLoopA 25s linear infinite 2s, bobbleB 2.4s ease-in-out infinite alternate;
+    }
+
+    #wukong {
+      top: 13%;
+      left: -170px;
+      width: 105px;
+      height: 90px;
+      animation: flyLoopA 19s linear infinite 6s, bobbleB 2s ease-in-out infinite alternate;
+    }
+
+    #bajie {
+      top: 28%;
+      right: -170px;
+      width: 95px;
+      height: 85px;
+      animation: flyLoopB 23s linear infinite 8s, bobbleA 2.8s ease-in-out infinite alternate;
+    }
+
+    #bullKing {
+      top: 35%;
+      left: -180px;
+      width: 110px;
+      height: 100px;
+      animation: flyLoopA 28s linear infinite 14s, bobbleA 3.2s ease-in-out infinite alternate;
+    }
+
+    #redBoy {
+      top: 31%;
+      right: -170px;
+      width: 85px;
+      height: 85px;
+      animation: flyLoopB 17s linear infinite 3s, bobbleB 1.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes flyLoopA {
+      0% { left: -220px; transform: scaleX(1); }
+      48% { left: calc(100vw + 60px); transform: scaleX(1); }
+      50% { left: calc(100vw + 60px); transform: scaleX(-1); }
+      98% { left: -220px; transform: scaleX(-1); }
+      100% { left: -220px; transform: scaleX(1); }
+    }
+
+    @keyframes flyLoopB {
+      0% { right: -220px; transform: scaleX(1); }
+      48% { right: calc(100vw + 60px); transform: scaleX(1); }
+      50% { right: calc(100vw + 60px); transform: scaleX(-1); }
+      98% { right: -220px; transform: scaleX(-1); }
+      100% { right: -220px; transform: scaleX(1); }
+    }
+
+    @keyframes bobbleA {
+      0% { margin-top: 0px; rotate: -4deg; }
+      100% { margin-top: 18px; rotate: 4deg; }
+    }
+
+    @keyframes bobbleB {
+      0% { margin-top: 0px; rotate: 5deg; }
+      100% { margin-top: 18px; rotate: -5deg; }
+    }
+
+    .buddha-halo {
+      transform-origin: 80px 65px;
+      animation: haloRotate 20s linear infinite;
+    }
+
+    @keyframes haloRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .mantra-bubble {
+      position: fixed;
+      font-size: 1.05rem;
+      letter-spacing: 0.12em;
+      color: #ffeaa7;
+      text-shadow: 0 0 10px #f39c12;
+      pointer-events: none;
+      font-weight: 700;
+      animation: floatUpWord 1.5s ease-out forwards;
+      z-index: 30;
+      white-space: nowrap;
+    }
+
+    @keyframes floatUpWord {
+      0% { opacity: 0; transform: translateY(0) scale(0.8); }
+      20% { opacity: 1; transform: translateY(-15px) scale(1.05); }
+      80% { opacity: 0.9; transform: translateY(-40px) scale(1); }
+      100% { opacity: 0; transform: translateY(-60px) scale(0.9); }
+    }
+
+    /* Nút Bật/Tắt Nhạc Nổi Góc Phải */
+    .music-control-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      z-index: 50;
+      background: rgba(18, 14, 5, 0.75);
+      border: 1px solid var(--gold);
+      color: var(--gold-bright);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-family: inherit;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .music-control-btn:hover {
+      background: var(--gold);
+      color: #120e05;
+      transform: translateY(-2px);
+    }
+
+    .music-control-btn.playing {
+      border-color: #2ed573;
+      color: #2ed573;
+    }
+
+    .celestial-glow {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: clamp(280px, 80vw, 480px);
+      height: clamp(280px, 80vw, 480px);
+      background: radial-gradient(circle, var(--gold-glow) 0%, transparent 68%);
+      pointer-events: none;
+      z-index: 1;
+      transition: opacity 1s ease;
+      opacity: 0.45;
+    }
+
+    header {
+      padding-top: clamp(2.5rem, 6vh, 3.5rem);
+      text-align: center;
+      z-index: 3;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 2.4rem);
+      letter-spacing: 0.25em;
+      color: var(--gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      text-shadow: 0 0 16px rgba(212, 175, 55, 0.4);
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+      color: var(--text-dim);
+      letter-spacing: 0.12em;
+      font-style: italic;
+    }
+
+    /* 3. KHU VỰC BÁT HƯƠNG */
+    .incense-stage {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      height: clamp(300px, 45vh, 380px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      z-index: 3;
+    }
+
+    #smokeCanvas {
+      position: absolute;
+      bottom: 84px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .burner-assembly {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 5;
+    }
+
+    .offering-incense-wrapper {
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translate3d(-50%, 140px, 0);
+      pointer-events: none;
+      z-index: 7;
+      opacity: 0;
+      will-change: transform, opacity;
+    }
+
+    .offering-stick {
+      width: 3.5px;
+      height: 140px;
+      background: linear-gradient(to bottom, #d63031 0%, #8b2b1d 20%, #4a150e 100%);
+      border-radius: 2px 2px 0 0;
+      position: relative;
+    }
+
+    .offering-stick::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #ff5722;
+      border-radius: 50%;
+      box-shadow: 0 0 10px 3px #ff9800;
+    }
+
+    .offering-active {
+      animation: elevateAndPlantIncense 3.2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    @keyframes elevateAndPlantIncense {
+      0% { opacity: 0; transform: translate3d(-50%, 140px, 0) scale(0.9); }
+      22% { opacity: 1; transform: translate3d(-50%, -105px, 0) scale(1.08); }
+      48% { opacity: 1; transform: translate3d(-50%, -115px, 0) scale(1.1); }
+      78% { opacity: 1; transform: translate3d(-50%, -15px, 0) scale(1); }
+      92% { opacity: 1; transform: translate3d(-50%, 0, 0) scale(1); }
+      100% { opacity: 0; transform: translate3d(-50%, 0, 0) scale(1); }
+    }
+
+    .sticks {
+      display: flex;
+      gap: 16px;
+      margin-bottom: -16px;
+      align-items: flex-end;
+    }
+
+    .stick {
+      width: 3px;
+      background: #7a3123;
+      position: relative;
+      border-radius: 2px 2px 0 0;
+    }
+
+    .stick.active::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 5px;
+      height: 5px;
+      background: #ff7300;
+      border-radius: 50%;
+      box-shadow: 0 0 8px 3px #ff9800;
+    }
+
+    .stick-1 { height: 125px; transform: rotate(-3deg); }
+    .stick-2 { height: 145px; }
+    .stick-3 { height: 125px; transform: rotate(3deg); }
+
+    .censer {
+      width: 110px;
+      height: 64px;
+      background: radial-gradient(circle at 50% 20%, #7d6328 0%, #3e3111 80%, #1e1807 100%);
+      border-radius: 0 0 55px 55px;
+      border: 1px solid #9f8038;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+    }
+
+    .censer-rim {
+      width: 124px;
+      height: 10px;
+      background: #9f8038;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.6);
+    }
+
+    .censer-base {
+      width: 74px;
+      height: 8px;
+      background: #544319;
+      border-radius: 3px;
+      margin-top: 2px;
+    }
+
+    /* 4. CỤM ĐIỀU KHIỂN */
+    .controls {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: clamp(1.5rem, 4vh, 2.5rem);
+      z-index: 3;
+      width: 100%;
+      padding: 0 1rem;
+    }
+
+    .action-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .btn-action {
+      border: 2px solid #f1c40f;
+      color: #fff4cc;
+      padding: clamp(0.75rem, 2vw, 0.85rem) clamp(1.6rem, 5vw, 2.2rem);
+      font-size: clamp(1rem, 3.2vw, 1.15rem);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 45px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(241, 196, 15, 0.35);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    .btn-incense {
+      background: linear-gradient(135deg, rgba(241, 196, 15, 0.25) 0%, rgba(212, 175, 55, 0.4) 100%);
+    }
+
+    .btn-fortune {
+      background: linear-gradient(135deg, rgba(231, 76, 60, 0.3) 0%, rgba(192, 57, 43, 0.5) 100%);
+      border-color: #ff7675;
+      color: #ffeaa7;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6), 0 0 15px rgba(231, 76, 60, 0.4);
+    }
+
+    .btn-action:hover { transform: translateY(-2px); }
+    .btn-action:active { transform: translateY(1px); }
+
+    .stats {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    .counter { color: #f1c40f; font-weight: 700; }
+
+    .quote {
+      font-style: italic;
+      color: #8c8577;
+      font-size: 0.9rem;
+      max-width: 440px;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* 5. POPUP BẢNG THƯ PHÁP */
+    .fortune-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      padding: 1rem;
+    }
+
+    .fortune-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .fortune-scroll {
+      width: 100%;
+      max-width: 460px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: radial-gradient(circle at 50% 20%, #2c1a0e 0%, #150c06 100%);
+      border: 2px solid #d4af37;
+      border-radius: 12px;
+      padding: clamp(1.4rem, 4vw, 2rem) clamp(1.2rem, 3.5vw, 1.8rem);
+      box-shadow: 0 0 45px rgba(212, 175, 55, 0.4), inset 0 0 20px rgba(0, 0, 0, 0.8);
+      color: #f5eedc;
+      position: relative;
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-align: center;
+    }
+
+    .fortune-modal-overlay.active .fortune-scroll {
+      transform: scale(1);
+    }
+
+    .scroll-header {
+      font-size: clamp(1.25rem, 4vw, 1.5rem);
+      color: #f1c40f;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    .fortune-rank {
+      display: inline-block;
+      margin: 8px 0 12px;
+      font-size: 0.92rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: rgba(241, 196, 15, 0.15);
+      border: 1px solid #f1c40f;
+      color: #ffeaa7;
+    }
+
+    .poem-box {
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #ffeedb;
+      background: rgba(0, 0, 0, 0.35);
+      padding: 12px 14px;
+      border-radius: 8px;
+      border-left: 3px solid #d4af37;
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    .explanation-title {
+      font-weight: 700;
+      color: #d4af37;
+      font-size: 1rem;
+      margin-bottom: 6px;
+      text-align: left;
+    }
+
+    .aspects-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      text-align: left;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 380px) {
+      .aspects-grid { grid-template-columns: 1fr; }
+    }
+
+    .aspect-item {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .aspect-item strong { color: #f1c40f; }
+
+    .advice-box {
+      font-size: 0.92rem;
+      color: #dcdde1;
+      line-height: 1.45;
+      text-align: left;
+      background: rgba(241, 196, 15, 0.05);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      border-left: 2px solid #e67e22;
+    }
+
+    .btn-close-scroll {
+      background: linear-gradient(135deg, #f1c40f 0%, #d4af37 100%);
+      color: #150c06;
+      border: none;
+      font-weight: 700;
+      padding: 0.65rem 2.2rem;
+      border-radius: 25px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-family: inherit;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .btn-close-scroll:hover {
+      box-shadow: 0 0 18px rgba(241, 196, 15, 0.7);
+      transform: translateY(-1px);
+    }
+
+    /* Ống xăm lắc lư */
+    .shaker-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 90;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .shaker-container.active { display: flex; }
+
+    .bamboo-tube {
+      width: 65px;
+      height: 110px;
+      background: linear-gradient(to right, #795548, #a1887f 40%, #5d4037 100%);
+      border-radius: 6px 6px 14px 14px;
+      border: 2px solid #d7ccc8;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+      animation: shakeTube 1.2s ease-in-out infinite alternate;
+    }
+
+    @keyframes shakeTube {
+      0% { transform: rotate(-16deg) translateY(0); }
+      50% { transform: rotate(18deg) translateY(-20px); }
+      100% { transform: rotate(-14deg) translateY(0); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NÚT BẬT TẮT NHẠC TIỆN DỤNG -->
+  <button class="music-control-btn" id="musicToggleBtn" onclick="toggleMusic(event)">
+    <span id="musicIcon">🎵</span> <span id="musicText">Bật Nhạc</span>
+  </button>
+
+  <!-- NỀN THIÊN ĐÌNH -->
+  <div class="heaven-backdrop">
+    <svg class="heaven-palace" viewBox="0 0 600 240">
+      <polygon points="300,20 200,65 400,65" fill="#f39c12" />
+      <polygon points="300,55 130,105 470,105" fill="#e67e22" />
+      <polygon points="300,95 60,155 540,155" fill="#d35400" />
+      <rect x="180" y="155" width="16" height="85" fill="#f1c40f" opacity="0.6" />
+      <rect x="240" y="155" width="16" height="85" fill="#f1c40f" opacity="0.6" />
+      <rect x="344" y="155" width="16" height="85" fill="#f1c40f" opacity="0.6" />
+      <rect x="404" y="155" width="16" height="85" fill="#f1c40f" opacity="0.6" />
+      <rect x="270" y="125" width="60" height="24" rx="3" fill="#2c3e50" stroke="#f1c40f" />
+      <circle cx="300" cy="137" r="4" fill="#e74c3c" />
+    </svg>
+
+    <div class="celestial-pillar pillar-left"></div>
+    <div class="celestial-pillar pillar-right"></div>
+    <div class="cloud-layer cloud-back"></div>
+    <div class="cloud-layer cloud-front"></div>
+  </div>
+
+  <!-- BẦU TRỜI CHƯ PHẬT, BỒ TÁT & THẦY TRÒ ĐƯỜNG TĂNG -->
+  <div class="buddha-realm">
+    <div class="divine-figure" id="buddha" title="Như Lai Phật Tổ">
+      <svg viewBox="0 0 160 160" width="100%" height="100%">
+        <g class="buddha-halo">
+          <circle cx="80" cy="65" r="46" fill="rgba(255, 215, 0, 0.25)" stroke="#f1c40f" stroke-width="2" stroke-dasharray="6,4" />
+          <circle cx="80" cy="65" r="36" fill="rgba(255, 235, 100, 0.3)" />
+          <text x="73" y="72" font-size="20" fill="#f39c12" font-weight="bold">卍</text>
+        </g>
+        <path d="M 50 135 Q 80 150 110 135 Q 80 125 50 135 Z" fill="#e67e22" stroke="#d35400" stroke-width="1.5" />
+        <path d="M 40 130 C 45 115, 75 115, 80 135 C 85 115, 115 115, 120 130 Z" fill="#f1c40f" stroke="#d35400" stroke-width="1.5" />
+        <path d="M 56 125 C 50 95, 60 75, 80 75 C 100 75, 110 95, 104 125 Z" fill="#e67e22" />
+        <path d="M 68 85 L 98 120 L 72 120 Z" fill="#f1c40f" />
+        <circle cx="70" cy="98" r="5" fill="#ffeaa7" />
+        <circle cx="90" cy="104" r="5" fill="#ffeaa7" />
+        <circle cx="80" cy="55" r="17" fill="#ffeaa7" />
+        <circle cx="80" cy="38" r="7" fill="#2c3e50" />
+        <circle cx="80" cy="50" r="1.8" fill="#e74c3c" />
+        <path d="M 73 54 Q 76 57 78 54" stroke="#7f8c8d" stroke-width="1.8" fill="none" />
+        <path d="M 82 54 Q 84 57 87 54" stroke="#7f8c8d" stroke-width="1.8" fill="none" />
+        <path d="M 77 62 Q 80 65 83 62" stroke="#c0392b" stroke-width="1.5" fill="none" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="guanyin" title="Quán Thế Âm Bồ Tát">
+      <svg viewBox="0 0 130 150" width="100%" height="100%">
+        <circle cx="65" cy="50" r="36" fill="rgba(220, 245, 255, 0.3)" stroke="#74b9ff" stroke-width="2" stroke-dasharray="5,3" />
+        <g fill="#fd79a8" stroke="#e84393" stroke-width="1.2">
+          <ellipse cx="65" cy="130" rx="30" ry="10" />
+          <path d="M 45 125 C 48 115, 62 115, 65 128 C 68 115, 82 115, 85 125 Z" />
+        </g>
+        <path d="M 48 122 C 45 95, 52 75, 65 75 C 78 75, 85 95, 82 122 Z" fill="#f5f6fa" stroke="#dcdde1" />
+        <path d="M 50 45 C 50 30, 80 30, 80 45 C 80 65, 85 85, 82 95 L 48 95 C 45 85, 50 65, 50 45 Z" fill="#ffffff" />
+        <circle cx="65" cy="50" r="14" fill="#ffeaa7" />
+        <circle cx="65" cy="46" r="1.5" fill="#e84118" />
+        <path d="M 59 49 Q 62 52 64 49" stroke="#718093" stroke-width="1.5" fill="none" />
+        <path d="M 66 49 Q 68 52 71 49" stroke="#718093" stroke-width="1.5" fill="none" />
+        <ellipse cx="76" cy="92" rx="4" ry="8" fill="#dff9fb" stroke="#00cec9" stroke-width="1" />
+        <path d="M 76 84 Q 82 76 86 78" stroke="#2ed573" stroke-width="2.2" fill="none" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="jadeEmperor" title="Ngọc Hoàng Đại Đế">
+      <svg viewBox="0 0 130 150" width="100%" height="100%">
+        <circle cx="65" cy="50" r="36" fill="rgba(255, 230, 120, 0.3)" stroke="#f39c12" stroke-width="2" stroke-dasharray="6,3" />
+        <ellipse cx="65" cy="130" rx="32" ry="11" fill="#8c7ae6" />
+        <circle cx="45" cy="126" r="12" fill="#9c88ff" />
+        <circle cx="85" cy="126" r="12" fill="#9c88ff" />
+        <path d="M 46 122 C 42 90, 50 72, 65 72 C 80 72, 88 90, 84 122 Z" fill="#f1c40f" stroke="#d35400" stroke-width="1.5" />
+        <rect x="62" y="76" width="6" height="22" rx="2" fill="#f5f6fa" stroke="#bdc3c7" stroke-width="1.2" />
+        <circle cx="65" cy="48" r="15" fill="#ffeaa7" />
+        <path d="M 60 56 Q 65 72 70 56 Z" fill="#2c3e50" />
+        <rect x="42" y="24" width="46" height="6" fill="#2c3e50" />
+        <path d="M 52 30 L 78 30 L 75 36 L 55 36 Z" fill="#f39c12" />
+        <line x1="46" y1="30" x2="46" y2="40" stroke="#f1c40f" stroke-width="2" stroke-dasharray="2,2" />
+        <line x1="52" y1="30" x2="52" y2="41" stroke="#f1c40f" stroke-width="2" stroke-dasharray="2,2" />
+        <line x1="65" y1="30" x2="65" y2="42" stroke="#e74c3c" stroke-width="2" stroke-dasharray="2,2" />
+        <line x1="78" y1="30" x2="78" y2="41" stroke="#f1c40f" stroke-width="2" stroke-dasharray="2,2" />
+        <line x1="84" y1="30" x2="84" y2="40" stroke="#f1c40f" stroke-width="2" stroke-dasharray="2,2" />
+        <circle cx="58" cy="46" r="2" fill="#2c3e50" />
+        <circle cx="72" cy="46" r="2" fill="#2c3e50" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="tripitaka" title="Đường Tam Tạng">
+      <svg viewBox="0 0 120 110" width="100%" height="100%">
+        <ellipse cx="60" cy="92" rx="34" ry="14" fill="#ffeaa7" stroke="#eccc68" stroke-width="1.8" />
+        <circle cx="42" cy="88" r="12" fill="#ffeaa7" />
+        <circle cx="78" cy="88" r="13" fill="#ffeaa7" />
+        <path d="M 44 88 C 42 68, 50 56, 60 56 C 70 56, 78 68, 76 88 Z" fill="#eb4d4b" stroke="#f0932b" stroke-width="2" />
+        <line x1="50" y1="62" x2="68" y2="84" stroke="#f1c40f" stroke-width="2.5" />
+        <ellipse cx="60" cy="68" rx="5" ry="8" fill="#ffeaa7" stroke="#e67e22" stroke-width="1" />
+        <circle cx="60" cy="42" r="15" fill="#ffeaa7" />
+        <path d="M 46 36 L 52 20 L 60 16 L 68 20 L 74 36 Z" fill="#e74c3c" stroke="#f1c40f" stroke-width="1.5" />
+        <circle cx="60" cy="22" r="3" fill="#f1c40f" />
+        <circle cx="55" cy="42" r="2.5" fill="#2f3542" />
+        <circle cx="65" cy="42" r="2.5" fill="#2f3542" />
+        <path d="M 57 48 Q 60 51 63 48" stroke="#c0392b" stroke-width="1.5" fill="none" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="dragonHorse" title="Bạch Long Mã">
+      <svg viewBox="0 0 120 100" width="100%" height="100%">
+        <ellipse cx="55" cy="82" rx="30" ry="12" fill="#e0f7fa" stroke="#80deea" stroke-width="1.5" />
+        <circle cx="35" cy="78" r="10" fill="#e0f7fa" />
+        <circle cx="75" cy="78" r="11" fill="#e0f7fa" />
+        <ellipse cx="55" cy="56" rx="26" ry="16" fill="#ffffff" stroke="#dcdde1" stroke-width="1.5" />
+        <path d="M 72 38 Q 80 46 76 56" stroke="#e74c3c" stroke-width="4.5" stroke-linecap="round" fill="none" />
+        <path d="M 28 52 Q 18 56 22 68" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none" />
+        <path d="M 68 56 L 82 34 L 96 42 L 80 64 Z" fill="#ffffff" stroke="#dcdde1" stroke-width="1" />
+        <path d="M 78 28 L 84 34 L 78 36 Z" fill="#ffffff" />
+        <path d="M 83 26 L 88 18 L 89 28 Z" fill="#f1c40f" />
+        <rect x="48" y="44" width="16" height="15" rx="3" fill="#c0392b" stroke="#f1c40f" stroke-width="1" />
+        <circle cx="88" cy="38" r="2.5" fill="#2c3e50" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="wukong" title="Tề Thiên Đại Thánh">
+      <svg viewBox="0 0 140 120" width="100%" height="100%">
+        <ellipse cx="65" cy="95" rx="35" ry="16" fill="#ffeaa7" stroke="#fdcb6e" stroke-width="2" />
+        <circle cx="45" cy="90" r="14" fill="#ffeaa7" />
+        <circle cx="85" cy="90" r="15" fill="#ffeaa7" />
+        <rect x="15" y="42" width="95" height="5" rx="2" fill="#d63031" stroke="#f1c40f" stroke-width="1.5" />
+        <ellipse cx="65" cy="65" rx="16" ry="18" fill="#f39c12" />
+        <circle cx="65" cy="38" r="18" fill="#d35400" />
+        <path d="M 56 36 C 56 28, 74 28, 74 36 C 74 46, 65 50, 65 50 C 65 50, 56 46, 56 36 Z" fill="#ffcccc" />
+        <path d="M 50 30 Q 65 24 80 30" stroke="#f1c40f" stroke-width="3.5" fill="none" />
+        <circle cx="65" cy="27" r="3" fill="#f1c40f" />
+        <circle cx="60" cy="36" r="3" fill="#2d3436" />
+        <circle cx="70" cy="36" r="3" fill="#2d3436" />
+        <path d="M 61 43 Q 65 47 69 43" stroke="#c0392b" stroke-width="2" fill="none" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="bajie" title="Thiên Bồng Nguyên Soái">
+      <svg viewBox="0 0 130 110" width="100%" height="100%">
+        <ellipse cx="65" cy="90" rx="34" ry="14" fill="#fab1a0" stroke="#e17055" stroke-width="1.8" />
+        <circle cx="45" cy="86" r="13" fill="#fab1a0" />
+        <circle cx="85" cy="86" r="14" fill="#fab1a0" />
+        <rect x="75" y="15" width="4" height="60" fill="#636e72" transform="rotate(-30 75 45)" />
+        <circle cx="65" cy="62" r="22" fill="#2d3436" />
+        <circle cx="65" cy="38" r="19" fill="#ffbe76" />
+        <ellipse cx="44" cy="36" rx="7" ry="14" fill="#f0932b" />
+        <ellipse cx="86" cy="36" rx="7" ry="14" fill="#f0932b" />
+        <ellipse cx="65" cy="42" rx="7" ry="5" fill="#f0932b" />
+        <circle cx="63" cy="42" r="1.5" fill="#30336b" />
+        <circle cx="67" cy="42" r="1.5" fill="#30336b" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="bullKing" title="Bình Thiên Đại Thánh">
+      <svg viewBox="0 0 130 120" width="100%" height="100%">
+        <ellipse cx="65" cy="98" rx="35" ry="13" fill="#57606f" stroke="#2f3542" stroke-width="1.5" />
+        <path d="M 48 35 Q 25 15 32 0 Q 42 16 52 28 Z" fill="#2f3542" stroke="#1e272e" stroke-width="1" />
+        <path d="M 82 35 Q 105 15 98 0 Q 88 16 78 28 Z" fill="#2f3542" stroke="#1e272e" stroke-width="1" />
+        <path d="M 44 95 C 40 70, 50 62, 65 62 C 80 62, 90 70, 86 95 Z" fill="#383b40" stroke="#f1c40f" stroke-width="1.5" />
+        <circle cx="65" cy="42" r="20" fill="#747d8c" />
+        <circle cx="65" cy="54" r="5" fill="none" stroke="#f1c40f" stroke-width="2.5" />
+        <circle cx="56" cy="38" r="3" fill="#d63031" />
+        <circle cx="74" cy="38" r="3" fill="#d63031" />
+      </svg>
+    </div>
+
+    <div class="divine-figure" id="redBoy" title="Thánh Anh Đại Vương">
+      <svg viewBox="0 0 110 110" width="100%" height="100%">
+        <ellipse cx="55" cy="90" rx="30" ry="12" fill="#ff7675" stroke="#d63031" stroke-width="1.8" />
+        <line x1="25" y1="20" x2="65" y2="85" stroke="#b33939" stroke-width="3" />
+        <polygon points="55,54 42,80 68,80" fill="#eb2f06" stroke="#f6b93b" stroke-width="1.5" />
+        <circle cx="55" cy="42" r="17" fill="#ffeaa7" />
+        <circle cx="42" cy="28" r="6" fill="#2d3436" />
+        <circle cx="68" cy="28" r="6" fill="#2d3436" />
+        <path d="M 55 34 Q 57 38 55 41 Q 53 38 55 34 Z" fill="#eb2f06" />
+      </svg>
+    </div>
+  </div>
+
+  <canvas id="petalCanvas"></canvas>
+  <canvas id="fxCanvas"></canvas>
+
+  <div class="celestial-glow" id="glow"></div>
+
+  <!-- Audio phát nhạc -->
+  <audio id="bgmAudio" loop preload="auto" playsinline>
+    <source src="public/nhac.mp3" type="audio/mpeg">
+    <source src="nhac.mp3" type="audio/mpeg">
+  </audio>
+
+  <header>
+    <h1>Tâm Hương Quán</h1>
+    <div class="subtitle">Thiên Cung Hội Ngộ • Bốc Quẻ Cầu May</div>
+  </header>
+
+  <div class="incense-stage">
+    <div class="offering-incense-wrapper" id="offeringIncense">
+      <div class="offering-stick"></div>
+    </div>
+
+    <canvas id="smokeCanvas" width="340" height="380"></canvas>
+
+    <div class="burner-assembly">
+      <div class="sticks">
+        <div class="stick stick-1" id="s1"></div>
+        <div class="stick stick-2" id="s2"></div>
+        <div class="stick stick-3" id="s3"></div>
+      </div>
+      <div class="censer-rim"></div>
+      <div class="censer"></div>
+      <div class="censer-base"></div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <div class="action-group">
+      <button class="btn-action btn-incense" id="lightBtn" onclick="lightIncense()">Thắp Nén Tâm Hương</button>
+      <button class="btn-action btn-fortune" id="fortuneBtn" onclick="drawFortune()">Xin Xăm Bốc Quẻ</button>
+    </div>
+    <div class="stats">Đã thành tâm dâng: <span class="counter" id="countDisplay">0</span> nén hương</div>
+    <div class="quote">"Thành tâm tất ứng • Cầu tài đắc tài, cầu bình an đắc cát tường."</div>
+  </div>
+
+  <div class="shaker-container" id="shakerBox">
+    <div class="bamboo-tube"></div>
+  </div>
+
+  <div class="fortune-modal-overlay" id="fortuneOverlay" onclick="closeOnBackdrop(event)">
+    <div class="fortune-scroll">
+      <div class="scroll-header" id="fTitle">QUẺ THỨ NHẤT</div>
+      <div class="fortune-rank" id="fRank">THƯỢNG THƯỢNG CÁT</div>
+      <div class="poem-box" id="fPoem"></div>
+      <div class="explanation-title">✦ LỜI THẦY BÓI LUẬN GIẢI:</div>
+      <div class="aspects-grid">
+        <div class="aspect-item"><strong>Gia Đạo:</strong> <span id="fHome"></span></div>
+        <div class="aspect-item"><strong>Tài Lộc:</strong> <span id="fWealth"></span></div>
+        <div class="aspect-item"><strong>Công Danh:</strong> <span id="fCareer"></span></div>
+        <div class="aspect-item"><strong>Tình Duyên:</strong> <span id="fLove"></span></div>
+      </div>
+      <div class="advice-box" id="fAdvice"></div>
+      <button class="btn-close-scroll" onclick="closeFortune()">Gấp Quẻ Lại</button>
+    </div>
+  </div>
+
+  <script>
+    // ============================================================
+    // 1. KHO DỮ LIỆU ĐẦY ĐỦ 64 QUẺ KINH DỊCH
+    // ============================================================
+    const fortuneData = [
+      {
+        title: "QUẺ SỐ 01: CÀN VI THIÊN",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Rồng vàng ẩn hiện chốn mây xanh\nVạn sự hanh thông chí toại thành\nCây cội sinh cành trổ hoa biếc\nPhúc ấm tiền nhân rạng sử danh.",
+        home: "Hỷ khí đầy nhà, gia đạo hưng long thuận hòa.",
+        wealth: "Tài lộc dồi dào, kinh doanh cầu tài đắc tài.",
+        career: "Thăng quan tiến chức, có quý nhân dẫn lối.",
+        love: "Duyên lành trời định, gắn kết sắt son.",
+        advice: "Đang thời cực thịnh, nên khiêm tốn giúp đời."
+      },
+      {
+        title: "QUẺ SỐ 02: KHÔN VI ĐỊA",
+        rank: "THƯỢNG CÁT",
+        poem: "Đất chở muôn loài đức rộng sâu\nNhẫn nại bao dung chẳng muộn sầu\nThuận theo lẽ trời trăm việc thuận\nVinh hoa phú quý tự tìm nhau.",
+        home: "Gia đạo yên vui, lấy nhu thắng cương ấm êm.",
+        wealth: "Tích lũy vững bền, hợp đầu tư lâu dài.",
+        career: "Lùi một bước tiến mười bước, được lòng đồng sự.",
+        love: "Thấu hiểu bao dung, bền chặt qua năm tháng.",
+        advice: "Giữ đức nhu thuận, tránh đối đầu trực diện."
+      },
+      {
+        title: "QUẺ SỐ 03: THỦY LÔI TRUÂN",
+        rank: "TRUNG HUNG",
+        poem: "Mầm non trỗi dậy giữa phong ba\nVạn sự khởi đầu khó nở hoa\nKiên định đợi thời qua giông bão\nSau cơn mưa nắng chiếu chan hòa.",
+        home: "Có xáo trộn nhỏ, cần bình tâm lắng nghe.",
+        wealth: "Tài chính chưa thông, chớ nên mạo hiểm.",
+        career: "Khởi đầu trắc trở, cần kiên trì bền chí.",
+        love: "Thử thách lòng người, cần thời gian chứng minh.",
+        advice: "Vạn sự khởi đầu nan, kiên định chờ thời cơ."
+      },
+      {
+        title: "QUẺ SỐ 04: SƠN THỦY MÔNG",
+        rank: "TRUNG BÌNH",
+        poem: "Mây mờ che phủ đỉnh non cao\nLạc bước rừng sâu biết ngả nào\nTìm thầy học đạo soi đuốc sáng\nSáng lòng tỏ mắt thỏa ước ao.",
+        home: "Con cháu cần uốn nắn, trong nhà khuyên răn từ tốn.",
+        wealth: "Tiền tài bình thường, chớ tin lời đường mật.",
+        career: "Cần học hỏi thêm, tìm người dẫn dắt có tâm.",
+        love: "Còn mơ hồ, cần chân thành bộc bạch.",
+        advice: "Hạ mình học hỏi, chớ tự mãn làm liều."
+      },
+      {
+        title: "QUẺ SỐ 05: THỦY THIÊN NHU",
+        rank: "TRUNG CÁT",
+        poem: "Mây đọng đầy trời đợi đổ mưa\nLòng thanh thản đón gió ban trưa\nẨm thực vui vầy nuôi chí lớn\nĐúng độ hoa tiêu rộ bốn mùa.",
+        home: "An ổn, chuẩn bị đón tin vui từ phương xa.",
+        wealth: "Tài lộc sắp tới, không nên nóng vội ép uổng.",
+        career: "Tích lũy nội lực, chờ lệnh xuất kích sẽ thắng.",
+        love: "Kiên nhẫn bồi đắp, chớ sốt sắng cưỡng cầu.",
+        advice: "Dục tốc bất đạt, dưỡng tâm chờ ngọn gió đông."
+      },
+      {
+        title: "QUẺ SỐ 06: THIÊN THỦY TỤNG",
+        rank: "HUNG",
+        poem: "Nước chảy ngược dòng gió thổi cao\nĐôi bên cãi vã dạ nao nao\nThôi thì nhịn một câu cho trọn\nTránh chốn quan trường rước khổ đau.",
+        home: "Dễ phát sinh tranh chấp khẩu thiệt, cẩn thận lời nói.",
+        wealth: "Đề phòng hao tài tốn của vì kiện tụng, tranh chấp.",
+        career: "Tiểu nhân gièm pha, tránh đối đầu công khai.",
+        love: "Bất đồng quan điểm, cần lắng nghe chớ tranh hơn thua.",
+        advice: "Lùi một bước trời cao biển rộng, dĩ hòa vi quý."
+      },
+      {
+        title: "QUẺ SỐ 07: ĐỊA THỦY SƯ",
+        rank: "TRUNG CÁT",
+        poem: "Dấy binh dẹp loạn giữ giang sơn\nKỷ cương nghiêm phép thắng oán hờn\nTướng sĩ đồng lòng nghe hiệu lệnh\nKhải hoàn ca khúc rạng giang sơn.",
+        home: "Cần giữ vững gia phong, trên dưới có tôn ti.",
+        wealth: "Quản lý chặt chẽ, chi tiêu đúng kế hoạch.",
+        career: "Gánh vác trọng trách, lãnh đạo tập thể vượt khó.",
+        love: "Cần rõ ràng dứt khoát, không mập mờ cảm xúc.",
+        advice: "Kỷ luật nghiêm minh, công tư rạch ròi mới thành đại sự."
+      },
+      {
+        title: "QUẺ SỐ 08: ĐỊA THỦY TƯƠNG TRÌ",
+        rank: "THƯỢNG CÁT",
+        poem: "Nước tụ về sông xuôi biển đông\nĐồng tâm hiệp lực thỏa ước mong\nBằng hữu tương phùng tay nắm chặt\nGian nan rũ sạch nhẹ tấc lòng.",
+        home: "Trong ấm ngoài êm, hóa giải mọi hiểu lầm.",
+        wealth: "Hợp tác làm ăn đại phát, tiền tài hanh thông.",
+        career: "Được bạn bè đồng nghiệp tương trợ, danh tiếng tăng cao.",
+        love: "Tâm đầu ý hợp, cùng chí hướng tương lai.",
+        advice: "Lấy chữ Tín làm đầu, chọn bạn mà chơi."
+      },
+      {
+        title: "QUẺ SỐ 09: PHONG THIÊN TIỂU SÚC",
+        rank: "TIỂU CÁT",
+        poem: "Mây phủ giăng giăng chẳng đổ mưa\nGió thoảng qua rèm buổi sớm trưa\nTích tiểu thành đại đừng nản chí\nKho lẫm đầy vơi dạ ước vừa.",
+        home: "Mọi việc ổn định, tích lũy bình an trong nếp sống.",
+        wealth: "Tiền vào túc tắc, tích cóp từng khoản nhỏ.",
+        career: "Chưa thể đột phá ngay, nên trau chuốt chi tiết.",
+        love: "Cần những cử chỉ quan tâm nhỏ để vun vén duyên lành.",
+        advice: "Tích tiểu thành đại, chớ nôn nóng làm việc quá sức."
+      },
+      {
+        title: "QUẺ SỐ 10: THIÊN TRẠCH LÝ",
+        rank: "TRUNG CÁT",
+        poem: "Dẫm đuôi cọp dữ chẳng cắn người\nKhéo léo nhu mì giữ nét tươi\nLễ nghĩa phân minh đường sáng tỏ\nBình an qua nạn rạng nụ cười.",
+        home: "Kính trên nhường dưới, giữ trọn phép tắc gia đình.",
+        wealth: "Cơ hội có nhưng tiềm ẩn rủi ro, cần cẩn trọng.",
+        career: "Ứng xử khéo léo với cấp trên và đối tác quyền lực.",
+        love: "Cư xử chừng mực, tôn trọng đời tư của nhau.",
+        advice: "Cẩn tắc vô áy náy, lấy lễ nghĩa hóa giải nguy nan."
+      },
+      {
+        title: "QUẺ SỐ 11: ĐỊA THIÊN THÁI",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Trời đất giao hòa xuân thắm tươi\nNgười người hớn hở hé môi cười\nKhí suy dời bước điều lành tới\nVinh hoa phú quý rạng muôn đời.",
+        home: "Đại hỷ lâm môn, gia đạo bình yên sum vầy.",
+        wealth: "Tài lộc cực vượng, đầu tư buôn bán sinh lời lớn.",
+        career: "Công danh rạng rỡ, thuận buồm xuôi gió có quý nhân.",
+        love: "Lương duyên mỹ mãn, đôi lứa sớm nên duyên cầm sắt.",
+        advice: "Thời vận hanh thông, nên tích cực hành thiện dưỡng phúc."
+      },
+      {
+        title: "QUẺ SỐ 12: THIÊN ĐỊA BĨ",
+        rank: "HUNG",
+        poem: "Trời đất xa rời bặt bóng chim\nTin lành mong mỏi luống công tìm\nNgười ngay ẩn dật chờ cơ hội\nKhép bớt tơ lòng chớ nổi chìm.",
+        home: "Không khí xa cách, các thành viên thiếu sẻ chia.",
+        wealth: "Tài vận bế tắc, cẩn thận thất thoát tiền bạc.",
+        career: "Tiểu nhân lấn lướt, không nên khởi sự dự án mới.",
+        love: "Giao tiếp lạnh nhạt, dễ nảy sinh nghi kỵ.",
+        advice: "Thủ thế chờ thời, giữ gìn phẩm hạnh chớ manh động."
+      },
+      {
+        title: "QUẺ SỐ 13: THIÊN HỎA ĐỒNG NHÂN",
+        rank: "THƯỢNG CÁT",
+        poem: "Lửa sáng rực trời tụ bốn phương\nCùng chung chí hướng dẫu tha hương\nĐồng lòng hiệp lực xây cơ nghiệp\nThẳng lối công danh rạng dặm trường.",
+        home: "Cả nhà đồng lòng, cùng gánh vác việc trọng đại.",
+        wealth: "Hùn hạp làm ăn thắng lợi, tài chính khởi sắc.",
+        career: "Được tập thể ủng hộ, danh tiếng lan xa.",
+        love: "Gặp được tri kỷ, đồng điệu tâm tư tình cảm.",
+        advice: "Mở rộng lòng dạ kết giao, tránh tư lợi cá nhân."
+      },
+      {
+        title: "QUẺ SỐ 14: HỎA THIÊN ĐẠI HỮU",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Mặt trời rọi sáng đỉnh trời cao\nCủa cải đầy kho ngọc sáng ngào\nThuận mệnh hợp lòng muôn kẻ mến\nPhúc thọ song toàn thỏa ước ao.",
+        home: "Hưng vượng hiển vinh, con cháu hiển đạt vinh quy.",
+        wealth: "Tài lộc sung mãn, nắm giữ tài sản đất đai lớn.",
+        career: "Đỉnh cao sự nghiệp, gặt hái thành quả rực rỡ.",
+        love: "Viên mãn trọn vẹn, nhận được tình cảm chở che chân thật.",
+        advice: "Nắm nhiều tài lộc chớ kiêu căng, nên bố thí giúp đời."
+      },
+      {
+        title: "QUẺ SỐ 15: ĐỊA SƠN KHIÊM",
+        rank: "THƯỢNG CÁT",
+        poem: "Núi cao cúi nép dưới bình nguyên\nTự giảm hào quang dứt não phiền\nQuân tử khiêm nhường thơm vạn thuở\nTrời ban phúc đức hưởng an nhiên.",
+        home: "Hòa thuận êm ấm nhờ mọi người biết nhường nhịn.",
+        wealth: "Tiền của vững vàng, kín đáo không sợ dòm ngó.",
+        career: "Càng khiêm tốn càng được trọng vọng, thăng tiến bền.",
+        love: "Chân thành mộc mạc, tình cảm ngày càng gắn bó.",
+        advice: "Khiêm tốn là đỉnh cao trí tuệ, luôn giữ đức nhún nhường."
+      },
+      {
+        title: "QUẺ SỐ 16: LÔI ĐỊA DỰ",
+        rank: "THƯỢNG CÁT",
+        poem: "Sấm vang mặt đất rộn reo vui\nKhổ ải ngàn trùng dứt sạch lùi\nKhởi sắc non sông bừng ánh sáng\nHân hoan mở hội chén nâng mùi.",
+        home: "Có tiệc mừng, đón người thân đoàn tụ.",
+        wealth: "Tài lộc vào nhanh, buôn bán đắt hàng bất ngờ.",
+        career: "Thời cơ phát huy tài năng, công việc suôn sẻ hào hứng.",
+        love: "Đôi bên vui vẻ hòa hợp, sớm đón tin báo hỷ.",
+        advice: "Vui vẻ nhưng chớ say sưa buông lỏng bản thân."
+      },
+      {
+        title: "QUẺ SỐ 17: TRẠCH LÔI TÙY",
+        rank: "TRUNG CÁT",
+        poem: "Sấm chìm đáy đầm tiếng lắng xa\nNương theo con nước thuận phong ba\nLòng trong dạ sáng tùy duyên đến\nChẳng nhọc công tìm cũng gặp ta.",
+        home: "Thuận theo tự nhiên, mọi xích mích tự hóa giải.",
+        wealth: "Tài chính bình ổn, làm đúng sức ắt có lộc.",
+        career: "Biết thích ứng hoàn cảnh mới, thuận nước đẩy thuyền.",
+        love: "Để cảm xúc thuận duyên tự nhiên, không nên ép buộc.",
+        advice: "Tùy cơ ứng biến, thuận lẽ tự nhiên tâm sẽ an."
+      },
+      {
+        title: "QUẺ SỐ 18: SƠN PHONG CỔ",
+        rank: "TRUNG BÌNH",
+        poem: "Gió lặng chân non bốc khí tà\nĐồ hư mối mọt dẫu ngâm nga\nCương quyết sửa mình xây dựng lại\nTro tàn trỗi dậy ánh kiêu sa.",
+        home: "Cần tháo gỡ triệt để những bất hòa âm ỉ từ xưa.",
+        wealth: "Rà soát lại chi tiêu, bịt các lỗ hổng thất thoát.",
+        career: "Cải tổ quy trình cũ, làm mới tư duy làm việc.",
+        love: "Bỏ qua lỗi lầm cũ, cho nhau cơ hội làm lại.",
+        advice: "Dũng cảm cắt bỏ tiêu cực, dứt khoát sửa sai."
+      },
+      {
+        title: "QUẺ SỐ 19: ĐỊA TRẠCH LÂM",
+        rank: "THƯỢNG CÁT",
+        poem: "Nước tụ bên đầm trỗi cỏ hoa\nXuân về cây cỏ trổ chan hòa\nThời vận cận kề mau nắm bắt\nTháng ngày rạng rỡ tỏa ngàn xa.",
+        home: "Đón tiếp khách quý mang tin vui tới cho gia đình.",
+        wealth: "Tài chính đang trên đà mở rộng, cầu tài đắc lợi.",
+        career: "Cơ hội bước lên chức vụ mới, lãnh đạo tin dùng.",
+        love: "Chuyện lứa đôi tiến triển nhanh chóng, tình cảm mặn nồng.",
+        advice: "Vận tốt đang đến, nắm bắt thời cơ ngay chớ để trôi qua."
+      },
+      {
+        title: "QUẺ SỐ 20: PHONG ĐỊA QUAN",
+        rank: "TRUNG CÁT",
+        poem: "Gió thổi trên đồng cảnh sáng trong\nTrầm ngâm quán chiếu lại tấc lòng\nChớ vội chuyển mình theo thế sự\nTâm nhàn ý tại thỏa ước mong.",
+        home: "Lắng nghe, thấu cảm với các thành viên trong nhà.",
+        wealth: "Giữ mức hiện tại, quan sát thị trường chớ vội xuất tiền.",
+        career: "Xem xét kỹ lưỡng trước khi thay đổi định hướng công việc.",
+        love: "Quan sát hành động thực tế hơn là những lời hứa suông.",
+        advice: "Tĩnh lặng quan sát đại cục, suy nghĩ chín chắn trước khi hành động."
+      },
+      {
+        title: "QUẺ SỐ 21: HỎA LÔI PHỆ HẠP",
+        rank: "TRUNG BÌNH CÁT",
+        poem: "Sấm chớp gầm vang xé bóng đêm\nCắn đứt rào ngăn mở lối êm\nCông lý phân minh trừ chướng ngại\nĐường quang bước dấn vững đôi chân.",
+        home: "Giải quyết dứt điểm mâu thuẫn để ổn định trật tự.",
+        wealth: "Xử lý các khúc mắc về nợ nần, hợp đồng ràng buộc.",
+        career: "Vượt qua trở ngại bằng sự cứng rắn và kỷ luật.",
+        love: "Nói thẳng thắn để tháo gỡ bức xúc trong lòng.",
+        advice: "Quyết đoán trừ khử chướng ngại, chớ chần chừ do dự."
+      },
+      {
+        title: "QUẺ SỐ 22: SƠN HỎA BÍ",
+        rank: "TRUNG CÁT",
+        poem: "Núi ngậm lửa hồng ánh rực tươi\nVẻ đẹp thanh tao rạng nụ cười\nHình thức hài hòa tâm đức sáng\nDanh thơm lưu dấu khắp muôn nơi.",
+        home: "Nhà cửa khang trang, không khí ấm cúng tươi vui.",
+        wealth: "Chi tiêu cho ngoại giao, hình ảnh nhưng thu lại danh dự.",
+        career: "Thuận lợi ngành nghề nghệ thuật, thẩm mỹ, quan hệ công chúng.",
+        love: "Bị thu hút bởi nét đẹp phong thái và tâm hồn trang nhã.",
+        advice: "Lấy phẩm chất thật làm gốc, hình thức bên ngoài chỉ là phụ trợ."
+      },
+      {
+        title: "QUẺ SỐ 23: SƠN ĐỊA BÁC",
+        rank: "HUNG",
+        poem: "Núi lở mòn chân đất chẳng dung\nTiểu nhân dòm ngó chuyện mung lung\nChờ khi sóng lặng thuyền buông bến\nGiữ trọn lòng thanh giữa chập chùng.",
+        home: "Phòng ngừa sứt mẻ vì lời gièm pha từ bên ngoài.",
+        wealth: "Đề phòng bị lừa gạt, thất thoát tài chính nghiêm trọng.",
+        career: "Bị cạnh tranh xấu, tốt nhất nên phòng thủ bảo toàn.",
+        love: "Dễ rạn nứt vì những va chạm vụn vặt thường nhật.",
+        advice: "Ẩn nhẫn giữ mình, không tranh đua khi hoàn cảnh bất lợi."
+      },
+      {
+        title: "QUẺ SỐ 24: ĐỊA LÔI PHỤC",
+        rank: "THƯỢNG CÁT",
+        poem: "Đông qua xuân tới ấm trần gian\nMầm sống hồi sinh nở ngập tràn\nVận hạn tiêu tan điều tốt lại\nCười vui rạng rỡ đón bình an.",
+        home: "Người ốm bình phục, gia đạo tìm lại tiếng cười.",
+        wealth: "Dòng tiền lưu thông trở lại sau thời gian ách tắc.",
+        career: "Dự án cũ phục hồi, khởi sắc công danh bước đầu.",
+        love: "Gương vỡ lại lành, người cũ có duyên tái hợp.",
+        advice: "Vận xui qua đi vận may trở lại, tự tin khởi động lại."
+      },
+      {
+        title: "QUẺ SỐ 25: THIÊN LÔI VÔ VỌNG",
+        rank: "TRUNG CÁT",
+        poem: "Sấm động trời cao chấn thế gian\nLòng ngay dạ thẳng bước thênh thang\nChớ tham xảo quyệt cầu hư ảo\nPhúc đức trời ban dạ vững vàng.",
+        home: "Sống chân thành, gia đình bình an tránh điều tiếng.",
+        wealth: "Tài lộc chân chính, không nên chơi may rủi.",
+        career: "Làm việc quang minh chính đại sẽ được công nhận.",
+        love: "Thành thật với nhau, không dùng mưu mẹo thử lòng.",
+        advice: "Giữ lòng trong sạch ngay thẳng, chớ làm bậy cầu may."
+      },
+      {
+        title: "QUẺ SỐ 26: SƠN THIÊN ĐẠI SÚC",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Chứa cả trời cao dưới núi sâu\nTài ba tích lũy bấy lâu nay\nĐến ngày xuất trận xưng danh tướng\nSự nghiệp vinh quang rạng cõi đời.",
+        home: "Gia đình thịnh vượng, con cháu học hành đỗ đạt cao.",
+        wealth: "Tài sản tích lũy dồi dào, kinh tế vững vàng.",
+        career: "Thời điểm bung sức thi thố tài năng, gặt hái thành quả lớn.",
+        love: "Tình cảm vững bền qua thử thách, chuẩn bị cưới xin.",
+        advice: "Dùng tài đức đã tích lũy để làm việc lớn, giúp đời lập công."
+      },
+      {
+        title: "QUẺ SỐ 27: SƠN LÔI DI",
+        rank: "TRUNG CÁT",
+        poem: "Cây cối non cao đón ánh mai\nNuôi thân dưỡng tính tránh bi ai\nMiệng mồm giữ kín điều oan trái\nPhúc tại lòng ta chẳng đổi thay.",
+        home: "Giữ gìn lời ăn tiếng nói, nhường nhịn trong gia đình.",
+        wealth: "Thu nhập đủ ấm no, chú ý đầu tư cho sức khỏe.",
+        career: "Tập trung nâng cao tay nghề, cẩn thận phát ngôn cơ quan.",
+        love: "Chăm sóc nhau từ sinh hoạt giản dị, tình yêu bền vững.",
+        advice: "Cẩn thận lời nói và ăn uống; dưỡng tâm dưỡng thân."
+      },
+      {
+        title: "QUẺ SỐ 28: TRẠCH PHONG ĐẠI QUÁ",
+        rank: "HUNG TRUNG CÁT",
+        poem: "Cột nhà trĩu nặng uốn cong thân\nGánh nặng trên vai bước ngại ngần\nQuyết chí kiên cường không nản bước\nQua cơn bão tố rạng phù vân.",
+        home: "Có việc trọng đại cần gia đình chung tay gánh vác.",
+        wealth: "Áp lực tài chính lớn, cần cân đối thu chi kỹ.",
+        career: "Gánh vác nhiệm vụ lớn vượt bậc, hoàn thành sẽ thăng hoa.",
+        love: "Cùng nhau vượt qua giai đoạn gian khó, thấu hiểu nhau.",
+        advice: "Kiên cường trước áp lực phi thường, dũng cảm đương đầu thử thách."
+      },
+      {
+        title: "QUẺ SỐ 29: KHẢM VI THỦY",
+        rank: "HUNG",
+        poem: "Nước cuộn vực sâu lớp lớp ghềnh\nCon thuyền trôi dạt sóng mông mênh\nGiữ tâm kiên định chờ cơ hội\nChớ vội lầm than luống giật mình.",
+        home: "Có nỗi bất an, cần bình tâm cùng nhau đối thoại.",
+        wealth: "Dễ hao tài, tuyệt đối không cho vay hay đầu tư mạo hiểm.",
+        career: "Thế hiểm nghèo, giữ chặt vị trí hiện tại là khôn ngoan.",
+        love: "Trắc trở nhiều nghi kỵ, tránh quyết định lúc nóng giận.",
+        advice: "Giữ tâm bất biến giữa muôn trùng hiểm trở, đợi ngày sáng."
+      },
+      {
+        title: "QUẺ SỐ 30: LY VI HỎA",
+        rank: "THƯỢNG CÁT",
+        poem: "Lửa sáng rực trời tỏa bốn phương\nNương theo ánh đuốc định con đường\nTâm thành tựa cội nguồn sinh phúc\nChiếu rọi trần gian dứt nhiễu nhương.",
+        home: "Hòa khí sáng sủa, gia đình có người vinh hiển đỗ đạt.",
+        wealth: "Tài vận hanh thông, buôn bán phát đạt rõ ràng.",
+        career: "Ý tưởng sáng tạo được khen thưởng, công danh bừng sáng.",
+        love: "Tình cảm nhiệt thành say đắm, đôi bên gắn bó.",
+        advice: "Dựa vào người hiền đức và giữ tâm sáng suốt chớ nóng vội."
+      },
+      {
+        title: "QUẺ SỐ 31: TRẠCH SƠN HÀM",
+        rank: "THƯỢNG CÁT",
+        poem: "Núi ngậm đầm sen nước biếc trong\nTâm giao cảm ứng tựa tơ lòng\nKhông lời mà hiểu niềm sâu kín\nVạn sự hanh thông thỏa ước mong.",
+        home: "Cả nhà thấu hiểu, không khí ấm cúng yêu thương.",
+        wealth: "Gặp đối tác ăn ý, tài lộc tự nhiên tìm tới.",
+        career: "Được đồng nghiệp yêu quý, việc giao tiếp đối ngoại thuận lợi.",
+        love: "Đồng điệu tâm hồn, cảm mến sâu sắc ngay từ đầu.",
+        advice: "Lấy chân tâm cảm hóa lòng người, tạo dựng mối quan hệ bền chặt."
+      },
+      {
+        title: "QUẺ SỐ 32: LÔI PHONG HẰNG",
+        rank: "THƯỢNG CÁT",
+        poem: "Sấm gió cùng nhau tự thuở nào\nKiên trì bền bỉ vượt gian lao\nĐường dài mới biết tài chân ngựa\nPhú quý dài lâu rực ánh sao.",
+        home: "An cư lạc nghiệp, gia phong ổn định bền vững.",
+        wealth: "Thu nhập ổn định, tích lũy trường tồn theo năm tháng.",
+        career: "Bền bỉ theo con đường đã chọn, xây dựng nền tảng vững chắc.",
+        love: "Thủy chung son sắt, vợ chồng tương kính như tân.",
+        advice: "Kiên định giữ vững đạo thường, không thay lòng đổi dạ."
+      },
+      {
+        title: "QUẺ SỐ 33: THIÊN SƠN ĐỘN",
+        rank: "TRUNG BÌNH",
+        poem: "Trời cao núi lặn bóng chim bay\nTạm lánh phong trần dưỡng chí hay\nChờ buổi bình minh xua bóng tối\nVẫy vùng sông núi thỏa lòng này.",
+        home: "Tránh xa những tranh cãi không cần thiết của họ hàng.",
+        wealth: "Bảo toàn tài chính, không xuống tiền đầu tư mới.",
+        career: "Lùi một bước để rèn luyện chuyên môn, tạm lánh cạnh tranh xấu.",
+        love: "Để cho nhau không gian riêng, chớ dồn ép người mình yêu.",
+        advice: "Biết lui đúng lúc là bậc thức thời, bảo toàn thực lực."
+      },
+      {
+        title: "QUẺ SỐ 34: LÔI THIÊN ĐẠI TRÁNG",
+        rank: "TRUNG CÁT",
+        poem: "Sấm nổ trời xanh chuyển thế gian\nKhí thiêng hùng dũng bước hiên ngang\nNgoại cương nội tĩnh giữ chừng mực\nSự nghiệp bền lâu sáng ngập tràn.",
+        home: "Hạ bớt cái tôi, không dùng quyền thế áp đặt người nhà.",
+        wealth: "Tài lực mạnh mẽ nhưng chi tiêu cần có chừng mực.",
+        career: "Khí thế hừng hực, nhưng tránh tự mãn thái quá kẻo sinh thù.",
+        love: "Thẳng thắn nhưng tinh tế, tránh tính khí gia trưởng.",
+        advice: "Dùng sức mạnh có đạo lý, tránh hung hăng làm liều."
+      },
+      {
+        title: "QUẺ SỐ 35: HỎA ĐỊA TẤN",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Mặt trời mọc rạng chốn trần gian\nÁnh sáng xua tan vạn nỗi sầu\nKhởi sắc công danh tài lộc tiến\nVinh hoa hưởng trọn đến mai sau.",
+        home: "Đón nhận niềm vui đất cát, gia đạo hưng thịnh.",
+        wealth: "Tài chính nhảy vọt, nhận khoản tiền thưởng hoặc lợi tức lớn.",
+        career: "Được lãnh đạo cất nhắc, sự nghiệp thăng tiến thần tốc.",
+        love: "Tình cảm tiến triển vượt bậc, hứa hẹn tương lai xum họp.",
+        advice: "Thừa thắng xông lên, đem tài năng cống hiến cho đời."
+      },
+      {
+        title: "QUẺ SỐ 36: ĐỊA HỎA MINH DI",
+        rank: "HUNG",
+        poem: "Mặt trời lặn khuất dưới màn đêm\nU uất trần gian giọt lệ mềm\nẨn nhẫn giữ lòng chờ sáng tỏ\nTránh điều thị phi chớ vội chen.",
+        home: "Có chuyện buồn phiền, cần nhẫn nại chớ xé to chuyện.",
+        wealth: "Phòng ngừa kẻ gian lừa lọc thất thoát tài sản.",
+        career: "Bị chèn ép tài năng, nên giữ mình khiêm tốn kín tiếng.",
+        love: "Có nỗi niềm khó giãi bày, tình duyên bị cản trở.",
+        advice: "Giấu tài chờ thời, giữ trọn sự trong sạch giữa lúc tối tăm."
+      },
+      {
+        title: "QUẺ SỐ 37: PHONG HỎA GIA NHÂN",
+        rank: "THƯỢNG CÁT",
+        poem: "Gió thổi ngọn đèn lửa ấm êm\nGia phong mẫu mực phúc êm đềm\nThuận hòa chồng vợ tâm tương ứng\nPhú quý vinh hoa nở trước thềm.",
+        home: "Gia đình kiểu mẫu, vợ chồng hòa thuận con thảo hiếu.",
+        wealth: "Tài chính gia đình vững, chi tiêu chu đáo có kế hoạch.",
+        career: "Hậu phương vững chắc thúc đẩy sự nghiệp ngoài đời hanh thông.",
+        love: "Gắn bó keo sơn, tình yêu hướng tới tổ ấm hôn nhân.",
+        advice: "Tề gia ổn định rồi mới ra ngoài mưu sự lớn."
+      },
+      {
+        title: "QUẺ SỐ 38: HỎA TRẠCH KHUÊ",
+        rank: "TRUNG HUNG",
+        poem: "Lửa bốc lên cao nước chảy xuôi\nĐôi đường cách biệt dạ bùi ngùi\nBất đồng ý kiến lòng ly tán\nNhẫn nại cầu hòa mới được vui.",
+        home: "Bất đồng ý kiến, thiếu vắng sự đồng cảm sẻ chia.",
+        wealth: "Tránh hùn hạp lúc này, dễ xích mích vì chia chác lợi nhuận.",
+        career: "Bất đồng quan điểm với đối tác, đình trệ tiến độ.",
+        love: "Chiến tranh lạnh, cần hạ hỏa để trò chuyện chân tình.",
+        advice: "Tìm điểm chung giữa dị biệt, tránh tranh cãi đối đầu kịch liệt."
+      },
+      {
+        title: "QUẺ SỐ 39: THỦY SƠN KIỂN",
+        rank: "HUNG",
+        poem: "Trước mặt sông sâu núi dựng thành\nTiến thoái gian nan bước độc hành\nDừng chân ngẫm lại tìm mưu kế\nChờ lúc hanh thông vượt gập ghềnh.",
+        home: "Gia đình gặp trở ngại, cần đoàn kết tìm hướng gỡ rối.",
+        wealth: "Tài chính eo hẹp, tạm hoãn kế hoạch bung tiền.",
+        career: "Công việc bị đình trệ, cần xin lời khuyên từ tiền bối.",
+        love: "Gặp rào cản từ gia đình hoặc khoảng cách địa lý.",
+        advice: "Thấy khó khăn thì dừng lại tự xem xét mình, chớ cố đấm ăn xôi."
+      },
+      {
+        title: "QUẺ SỐ 40: LÔI THỦY GIẢI",
+        rank: "THƯỢNG CÁT",
+        poem: "Sấm động trời mưa tuyết rã tan\nNạn tai gỡ bỏ dạ hân hoan\nOan khiên dứt sạch lòng thanh thản\nĐường rộng thênh thang bước khải hoàn.",
+        home: "Khúc mắc được giải tỏa, gia đình lấy lại hòa khí an vui.",
+        wealth: "Nợ nần được tháo gỡ, tài chính khởi sắc lưu thông.",
+        career: "Vướng mắc công việc được xử lý dứt điểm, thuận buồm xuôi gió.",
+        love: "Bỏ qua hờn ghen, tình cảm mặn mà trở lại.",
+        advice: "Rào cản đã gỡ xong, mau chóng nắm bắt cơ hội tiến lên."
+      },
+      {
+        title: "QUẺ SỐ 41: SƠN TRẠCH TỔN",
+        rank: "TRUNG CÁT",
+        poem: "Bớt đầm đắp núi cảnh non ngàn\nTổn kỷ lợi nhân phúc ngập tràn\nChịu chút thiệt thòi gieo quả ngọt\nNgày sau ắt hẳn hưởng vinh sang.",
+        home: "Mỗi người nhường một bước, gia đình ắt êm đẹp.",
+        wealth: "Chịu hao hụt ngắn hạn để đầu tư nền tảng dài lâu.",
+        career: "Hy sinh công sức ban đầu sẽ nhận sự tôn kính và đền đáp lớn.",
+        love: "Chăm lo và cho đi nhiều hơn, tình cảm ngày càng sâu đậm.",
+        advice: "Bớt lòng tham sân giận, cho đi để nhận lại phước dày."
+      },
+      {
+        title: "QUẺ SỐ 42: PHONG LÔI ÍCH",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Gió thổi sấm vang ích nước non\nHoa tươi cỏ thắm lộc sinh tồn\nBao năm vun xới nay thu quả\nPhú quý danh tài rạng cháu con.",
+        home: "Gia đình thêm người thêm của, thịnh vượng bền lâu.",
+        wealth: "Tài lộc gia tăng nhanh chóng, kinh doanh thu lời lớn.",
+        career: "Được trao cơ hội vàng để bứt phá và mở rộng quy mô.",
+        love: "Tình cảm ngày càng gắn bó và thấu hiểu lẫn nhau.",
+        advice: "Thấy việc thiện thì mau làm, thấy lỗi lầm thì quyết sửa."
+      },
+      {
+        title: "QUẺ SỐ 43: TRẠCH THIÊN QUẢI",
+        rank: "TRUNG BÌNH CÁT",
+        poem: "Đầm dâng ngập đỉnh dứt điều tà\nQuyết đoán trừ gian giữ nếp nhà\nQuang minh chính trực xua u tối\nÁnh sáng công bình tỏa ngút xa.",
+        home: "Loại trừ thói quen xấu trong nếp sống gia đình.",
+        wealth: "Cắt lỗ kịp thời các khoản đầu tư rủi ro.",
+        career: "Thẳng thắn dứt khoát xử lý vi phạm, không nhân nhượng cái xấu.",
+        love: "Rõ ràng dứt khoát trong tình cảm, tránh dây dưa mập mờ.",
+        advice: "Dứt khoát đoạn tuyệt với điều xấu, nhưng phải giữ thái độ ôn hòa."
+      },
+      {
+        title: "QUẺ SỐ 44: THIÊN PHONG CẤU",
+        rank: "TRUNG BÌNH",
+        poem: "Gió thoảng chân trời chợt gặp nhau\nDuyên may đưa lối mối ban đầu\nCảnh giác phù hoa mê hoặc dạ\nGiữ lòng trong sáng tránh niềm đau.",
+        home: "Cẩn thận người lạ ghé thăm gây xáo trộn hòa khí.",
+        wealth: "Tránh cơ hội kiếm tiền dễ dãi mà ẩn chứa bẫy rập.",
+        career: "Đề phòng tiểu nhân tiếp cận nịnh nọt trục lợi.",
+        love: "Tình cờ gặp gỡ bất ngờ, chớ vội trao trọn niềm tin.",
+        advice: "Cảnh giác trước những cám dỗ bất ngờ, chớ để thị phi dẫn dụ."
+      },
+      {
+        title: "QUẺ SỐ 45: TRẠCH ĐỊA TỤY",
+        rank: "THƯỢNG CÁT",
+        poem: "Nước tụ bên đầm cá lội bơi\nNgười người tề tựu rạng phương trời\nĐồng lòng tích tụ muôn nguồn lực\nCơ nghiệp vinh quang thỏa ước đời.",
+        home: "Họ hàng đoàn tụ, con cháu quây quần vui vẻ đầm ấm.",
+        wealth: "Tập trung được nguồn vốn lớn, tài chính phát triển mạnh.",
+        career: "Tập hợp được nhân tài xuất sắc, tạo nên sức mạnh tập thể.",
+        love: "Tình cảm hội tụ đủ duyên lành, hướng đến ngày vui trăm năm.",
+        advice: "Tập hợp sức mạnh tập thể, dùng lòng chí thành để gắn kết."
+      },
+      {
+        title: "QUẺ SỐ 46: ĐỊA PHONG THĂNG",
+        rank: "THƯỢNG CÁT",
+        poem: "Cây nhỏ vươn mình khỏi đất sâu\nNgày ngày tích lũy chẳng lo âu\nVươn lên đón ánh mai rực rỡ\nBóng tỏa nghìn năm rạng rỡ đầu.",
+        home: "Gia đình từng bước khấm khá, con cái ngoan ngoãn tiến bộ.",
+        wealth: "Tài vận tiến triển chắc chắn, tích lũy ngày một nhiều.",
+        career: "Thăng tiến từng bước vững vàng, được cấp trên nâng đỡ.",
+        love: "Tình cảm vun đắp bền bỉ mỗi ngày, càng ở lâu càng quý mến.",
+        advice: "Kiên nhẫn tiến lên từng bước, không nóng vội đốt cháy giai đoạn."
+      },
+      {
+        title: "QUẺ SỐ 47: TRẠCH THỦY KHỐN",
+        rank: "HUNG",
+        poem: "Đầm cạn trơ rêu nước chảy đâu\nGian nan vây bọc mối âu sầu\nLời ngay ai tỏ người nghi kỵ\nẨn nhẫn tu tâm vượt hiểm sâu.",
+        home: "Có gánh nặng tài chính hoặc gia cảnh khó khăn, cần đồng lòng.",
+        wealth: "Tiền bạc cạn kiệt túng quẫn, thắt lưng buộc bụng.",
+        career: "Bị cô lập hoặc hiểu lầm, nói không ai tin, cần nhẫn nại.",
+        love: "Thiếu thốn làm rạn nứt tình cảm, cần sự cảm thông sâu sắc.",
+        advice: "Gian nan rèn luyện chí khí quân tử, nhẫn nại đợi ngày hanh thông."
+      },
+      {
+        title: "QUẺ SỐ 48: THỦY PHONG TỈNH",
+        rank: "TRUNG CÁT",
+        poem: "Giếng nước trong lành mạch chẳng vơi\nNuôi người tắm mát khắp muôn nơi\nChăm lo tu sửa giằng dây gáo\nNguồn sống dồi dào thỏa ước đời.",
+        home: "Bảo tồn nền nếp gia truyền, chăm sóc đời sống tinh thần.",
+        wealth: "Tài lộc đều đặn như giếng ngầm, cần quản lý chi tiêu cẩn thận.",
+        career: "Đào sâu chuyên môn, trở thành chỗ dựa vững chắc cho tập thể.",
+        love: "Tình cảm sâu sắc chân chất, nuôi dưỡng tình yêu lâu dài.",
+        advice: "Giữ tâm trong sạch và không ngừng tu dưỡng giá trị bản thân."
+      },
+      {
+        title: "QUẺ SỐ 49: TRẠCH HỎA CÁCH",
+        rank: "THƯỢNG CÁT",
+        poem: "Lửa nước tương tranh đổi vận trời\nCanh tân biến hóa đổi đời tươi\nBỏ điều cũ kỹ tìm đường mới\nThắng lợi rạng ngời nở nụ cười.",
+        home: "Gia đình thay đổi nếp sống mới, bỏ đi hủ tục xưa cũ.",
+        wealth: "Chuyển đổi phương thức kinh doanh, mở ra nguồn thu mới.",
+        career: "Cải cách công việc, mạnh dạn đổi mới mang lại thành công lớn.",
+        love: "Thay đổi bản thân để thấu hiểu người yêu, mở ra giai đoạn mới.",
+        advice: "Thời cơ đổi mới đã chín muồi, quyết đoán hành động theo lẽ phải."
+      },
+      {
+        title: "QUẺ SỐ 50: HỎA PHONG ĐỈNH",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Đỉnh ngọc đúc xong vững thế chân\nNấu điều thanh tịnh đãi hiền nhân\nNghiệp lớn vững vàng theo năm tháng\nPhúc ấm truyền ban rạng đức ân.",
+        home: "Gia thế vững vàng hưng thịnh, nền nếp gia phong sáng ngời.",
+        wealth: "Tài chính vững như bàn thạch, tiền tài dồi dào phú quý.",
+        career: "Đạt vị trí cao quý, được trao trọng trách to lớn nhất.",
+        love: "Mối lương duyên danh giá, bền vững trọn đời gắn kết.",
+        advice: "Dùng tài đức để bảo tồn sự nghiệp, bồi dưỡng thế hệ kế cận."
+      },
+      {
+        title: "QUẺ SỐ 51: THUẦN CHẤN",
+        rank: "TRUNG CÁT",
+        poem: "Sấm vang ngàn dặm chuyển trời tây\nMuôn vật kinh hoàng dạ chuyển lay\nCười nói tự nhiên không biến sắc\nBình an qua nạn bước đường hay.",
+        home: "Có biến cố bất ngờ xảy đến, nhưng biết giữ bình tĩnh sẽ qua mau.",
+        wealth: "Thị trường biến động giật mình, giữ chặt tiền bạc chớ hoảng loạn.",
+        career: "Gặp sự cố lớn bất thình lình; người giữ được bình tĩnh sẽ thắng lớn.",
+        love: "Xảy ra cãi vã chấn động, nhanh chóng hòa giải sẽ êm xuôi.",
+        advice: "Biến cố thử thách lòng can đảm; giữ tâm bất động trước mọi sợ hãi."
+      },
+      {
+        title: "QUẺ SỐ 52: THUẦN CẤN",
+        rank: "TRUNG CÁT",
+        poem: "Núi đứng lặng im sừng sững cao\nChặn dòng trần tục lướt lao xao\nDừng chân đứng lại soi tâm cảnh\nThanh thản hồn thơ dạ ước ao.",
+        home: "Gia đình an phận thủ thường, tránh xa thị phi bên ngoài.",
+        wealth: "Tiền tài ổn định, nên án binh bất động chớ vội đầu tư mới.",
+        career: "Biết điểm dừng đúng lúc, củng cố vị trí hiện tại thay vì mở rộng.",
+        love: "Khoảng lặng cần thiết để cả hai cùng nhìn nhận lại tình cảm.",
+        advice: "Biết dừng đúng chỗ đúng lúc là bậc thượng trí, giữ tâm bất động."
+      },
+      {
+        title: "QUẺ SỐ 53: PHONG SƠN TIỆM",
+        rank: "THƯỢNG CÁT",
+        poem: "Cây mọc non cao nhích bóng dần\nNhạn bay từng bước vượt gian truân\nChậm mà vững chắc xây nền móng\nHạnh phúc dài lâu đón đức ân.",
+        home: "Gia đạo tiến triển đầm ấm vững vàng, chuẩn bị hôn lễ nghi thức.",
+        wealth: "Tài lộc tích lũy tăng dần theo thời gian, không có rủi ro.",
+        career: "Thăng tiến từng nấc thang vững chắc, đường quan lộ hanh thông.",
+        love: "Tiến triển theo đúng trình tự từ tìm hiểu đến hôn nhân trọn vẹn.",
+        advice: "Dục tốc bất đạt, làm việc gì cũng cần trình tự lớp lang bài bản."
+      },
+      {
+        title: "QUẺ SỐ 54: LÔI TRẠCH QUY MUỘI",
+        rank: "HUNG",
+        poem: "Gả gái vội vàng trái lễ nghi\nĐầu đuôi lộn xộn rước sầu bi\nThấy lợi quên điều nhân nghĩa chuẩn\nĐường dài hụt hẫng hận chia ly.",
+        home: "Gia đình xáo trộn do hành sự hấp tấp, thiếu tôn ti trật tự.",
+        wealth: "Đầu tư nóng vội, làm sai quy trình dẫn đến mất mát tiền của.",
+        career: "Nôn nóng đốt cháy giai đoạn, vi phạm kỷ luật dễ rước rắc rối.",
+        love: "Tình cảm vội vàng thiếu tìm hiểu, dễ nảy sinh bất đồng đổ vỡ.",
+        advice: "Tuân thủ phép tắc và chuẩn mực, chớ để lòng tham làm mờ mắt."
+      },
+      {
+        title: "QUẺ SỐ 55: LÔI HỎA PHONG",
+        rank: "THƯỢNG CÁT",
+        poem: "Sấm động lửa trời sáng rực hoa\nThời kỳ cực thịnh trút phong ba\nGiữ gìn phúc lộc khi hưng thịnh\nÁnh nhật lưng trời tỏa bóng xa.",
+        home: "Gia đạo sung túc đủ đầy, nở mày nở mặt với bà con lối xóm.",
+        wealth: "Tài lộc cực thịnh, tiền tài đổ về dồi dào bội thu.",
+        career: "Sự nghiệp đạt đỉnh cao rạng rỡ, làm chủ tình thế hoàn toàn.",
+        love: "Tình yêu rực rỡ say đắm, đôi bên tràn ngập niềm vui.",
+        advice: "Cực thịnh ắt sinh suy, phải biết lo xa phòng khi mặt trời lặn."
+      },
+      {
+        title: "QUẺ SỐ 56: HỎA SƠN LỮ",
+        rank: "TRUNG BÌNH",
+        poem: "Lửa cháy ven non bóng khách xa\nBôn ba muôn dặm chốn quan hà\nThận trọng giữ mình nơi đất khách\nBình an trở gót rạng quê nhà.",
+        home: "Có người thân đi xa lập nghiệp, trong nhà cần giữ hòa khí.",
+        wealth: "Tài lộc từ việc buôn bán phương xa, đi lại nhiều mới sinh tài.",
+        career: "Công tác xa, thay đổi môi trường làm việc; cần khiêm tốn nhẫn nhịn.",
+        love: "Yêu xa hoặc tình cảm còn trôi nổi, cần sự thấu hiểu và tin tưởng.",
+        advice: "Nơi đất khách quê người nên khiêm nhường, giữ gìn lễ nghĩa."
+      },
+      {
+        title: "QUẺ SỐ 57: THUẦN TỐN",
+        rank: "TRUNG CÁT",
+        poem: "Gió thoảng vào sâu khắp góc trời\nNhu hòa len lỏi chẳng cần lời\nChân thành bền bỉ lay lòng đá\nVạn sự hanh thông thỏa ước đời.",
+        home: "Hòa nhã nhẹ nhàng giải quyết mọi nút thắt tình cảm.",
+        wealth: "Tài chính lưu thông đều đặn, thu lợi từ sự linh hoạt khéo léo.",
+        career: "Dùng sự mềm mỏng, nhẫn nại thuyết phục để đạt mục tiêu.",
+        love: "Quan tâm tinh tế, dịu dàng làm tan chảy sự lạnh nhạt.",
+        advice: "Lấy nhu thắng cương, mềm mỏng thấm sâu sẽ đạt hiệu quả bền vững."
+      },
+      {
+        title: "QUẺ SỐ 58: THUẦN ĐOÀI",
+        rank: "THƯỢNG CÁT",
+        poem: "Hai đầm giao nước sóng liền nhau\nBằng hữu chung vui rạng sắc màu\nĐàm đạo lời hay vun đức hạnh\nNiềm vui trọn vẹn dứt niềm đau.",
+        home: "Gia đình rộn rã tiếng cười, khách quý ghé thăm đem niềm vui.",
+        wealth: "Tài lộc đắc lợi nhờ ăn nói khéo léo và đối nhân xử thế tốt.",
+        career: "Thương lượng thành công, đàm phán hợp đồng thu về kết quả mỹ mãn.",
+        love: "Tình cảm ngọt ngào lãng mạn, đôi lứa cùng chung sở thích vui vẻ.",
+        advice: "Dùng sự hòa nhã làm vui lòng người, tránh lời bông lơn phù phiếm."
+      },
+      {
+        title: "QUẺ SỐ 59: PHONG THỦY HOÁN",
+        rank: "TRUNG BÌNH CÁT",
+        poem: "Gió lướt mặt hồ băng tuyết tan\nHóa giải ngăn cách dứt nguy nan\nMở lòng đón nhận nguồn sinh khí\nRộng lối tương lai bước khải hoàn.",
+        home: "Xóa tan mọi hiềm khích hiểu lầm xưa cũ, gắn kết gia đình.",
+        wealth: "Giải tỏa các nguồn vốn bị ứ đọng, dòng tiền bắt đầu lưu thông.",
+        career: "Giải quyết bế tắc tập thể, tạo ra luồng sinh khí mới cho tổ chức.",
+        love: "Hóa giải giận hờn, tình cảm trôi chảy nhẹ nhàng như gió mây.",
+        advice: "Mở rộng lòng bao dung, xóa tan mọi định kiến và rào cản ngăn cách."
+      },
+      {
+        title: "QUẺ SỐ 60: THỦY TRẠCH TIẾT",
+        rank: "TRUNG CÁT",
+        poem: "Nước chứa trong đầm mức vẹn tròn\nTiết chế chừng mực phúc trường tồn\nĂn tiêu có độ đời thanh thản\nCơ nghiệp truyền ban rạng cháu con.",
+        home: "Nề nếp gia phong chừng mực, trên dưới giữ gìn quy củ.",
+        wealth: "Chi tiêu tiết kiệm hợp lý, tránh lãng phí tiền bạc của cải.",
+        career: "Làm việc có giới hạn kỷ luật, không tham lam làm vượt thẩm quyền.",
+        love: "Biết kiềm chế cảm xúc, tôn trọng ranh giới và chuẩn mực đôi bên.",
+        advice: "Tiết chế đúng mực sẽ bền lâu, nhưng chớ hà tiện khắt khe quá mức."
+      },
+      {
+        title: "QUẺ SỐ 61: PHONG TRẠCH TRUNG PHU",
+        rank: "THƯỢNG THƯỢNG CÁT",
+        poem: "Gió thổi trên đầm nước gợn êm\nTâm thành cảm ứng đến muôn bên\nLòng tin như núi đời che chở\nPhúc ấm trời ban rạng trước thềm.",
+        home: "Cả nhà tin tưởng yêu thương lẫn nhau tuyệt đối, trong ấm ngoài êm.",
+        wealth: "Kinh doanh phát tài nhờ giữ chữ Tín hàng đầu với đối tác.",
+        career: "Được lãnh đạo và đồng nghiệp trao trọn niềm tin, giao việc lớn.",
+        love: "Chân thành son sắt, tình yêu xuất phát từ sự thấu hiểu từ đáy lòng.",
+        advice: "Lấy chữ Tín và lòng thành làm gốc; đức chí thành cảm động trời đất."
+      },
+      {
+        title: "QUẺ SỐ 62: LÔI SƠN TIỂU QUÁ",
+        rank: "TRUNG BÌNH",
+        poem: "Chim bay qua núi tiếng kêu than\nChớ vội bay cao rước hiểm nguy\nHạ cánh làm tổ nơi an ổn\nChờ ngày cánh vững lướt gian nan.",
+        home: "Cẩn thận lời ăn tiếng nói, nhường nhịn tránh xung đột nhỏ.",
+        wealth: "Chỉ nên thu vén việc nhỏ, không nên mưu sự đầu tư quy mô lớn.",
+        career: "Tỉ mỉ cẩn trọng việc giấy tờ pháp lý, tránh sai sót chi tiết.",
+        love: "Chú ý lắng nghe cảm nhận của đối phương từ những việc nhỏ nhất.",
+        advice: "Làm việc nhỏ thì tốt, việc lớn thì dừng; giữ sự cẩn trọng tỉ mỉ."
+      },
+      {
+        title: "QUẺ SỐ 63: THỦY HỎA KÝ TẾ",
+        rank: "THƯỢNG CÁT",
+        poem: "Nước trên lửa dưới việc vuông tròn\nCông thành danh toại dạ an vui\nĐạt đỉnh vinh quang gìn phúc đức\nGiữ gìn thành quả trọn lòng son.",
+        home: "Mọi việc trong nhà đều an bài êm đẹp, yên vui thịnh vượng.",
+        wealth: "Mục tiêu tài chính đã hoàn thành, tiền bạc thu về đầy đủ.",
+        career: "Dự án hoàn tất xuất sắc, đón nhận khen thưởng và thành tựu.",
+        love: "Tình duyên đơm hoa kết trái, đi đến bến đỗ hạnh phúc.",
+        advice: "Việc đã thành thì phải phòng lúc suy; cẩn thận giữ gìn thành quả."
+      },
+      {
+        title: "QUẺ SỐ 64: HỎA THỦY VỊ TẾ",
+        rank: "TRUNG CÁT",
+        poem: "Lửa trên nước dưới việc chưa xong\nCáo nhỏ qua sông ướt đuôi lòng\nChớ nản chí trai đường phía trước\nKhởi đầu chương mới rạng non sông.",
+        home: "Gia đình chuẩn bị bước sang một giai đoạn mới, cần cùng nhau chuẩn bị.",
+        wealth: "Dòng tiền sắp tới đích nhưng cần thêm nỗ lực cuối cùng.",
+        career: "Kết thúc chặng đường cũ để mở ra chu kỳ phát triển mới rộng lớn hơn.",
+        love: "Đang trong giai đoạn chuyển mình tìm hiểu sâu hơn, đầy hứa hẹn.",
+        advice: "Vạn sự chưa xong là khởi đầu của cái mới; giữ vững niềm tin bước tiếp."
+      }
+    ];
+
+    // ============================================================
+    // 2. ÂM THANH & BỘ TỔNG HỢP NHẠC THIỀN DỰ PHÒNG (SMART AUDIO)
+    // ============================================================
+    const bgm = document.getElementById('bgmAudio');
+    const musicBtn = document.getElementById('musicToggleBtn');
+    const musicIcon = document.getElementById('musicIcon');
+    const musicText = document.getElementById('musicText');
+
+    let audioCtx = null;
+    let isMusicPlaying = false;
+    let synthTimer = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioClass = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioClass();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    // Bộ phát chuông xoay tịnh tâm (fallback khi không tải được file mp3)
+    function playSingingBowlTone() {
+      if (!isMusicPlaying) return;
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const freqs = [196, 392, 587.3, 880]; // Tần số thiền định G3, G4, D5, A5
+        
+        freqs.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(freq + (Math.random() * 2 - 1), now);
+
+          gain.gain.setValueAtTime(0, now);
+          gain.gain.linearRampToValueAtTime(0.08 / (idx + 1), now + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.5);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 4.6);
+        });
+
+        synthTimer = setTimeout(playSingingBowlTone, 4800);
+      } catch (e) { }
+    }
+
+    function toggleMusic(e) {
+      if (e) e.stopPropagation();
+      getAudioContext();
+
+      if (isMusicPlaying) {
+        // Tắt nhạc
+        bgm.pause();
+        if (synthTimer) clearTimeout(synthTimer);
+        isMusicPlaying = false;
+        musicBtn.classList.remove('playing');
+        musicIcon.innerText = '🔇';
+        musicText.innerText = 'Đã Tắt Nhạc';
+      } else {
+        // Bật nhạc
+        isMusicPlaying = true;
+        musicBtn.classList.add('playing');
+        musicIcon.innerText = '🎵';
+        musicText.innerText = 'Đang Tịnh Tâm';
+
+        const playPromise = bgm.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            console.log("Kích hoạt nhạc thiền Web Audio Synth...");
+            playSingingBowlTone();
+          });
+        }
+      }
+    }
+
+    function autoStartAudioOnInteract() {
+      if (!isMusicPlaying) {
+        toggleMusic();
+      }
+      document.removeEventListener('pointerdown', autoStartAudioOnInteract);
+    }
+    document.addEventListener('pointerdown', autoStartAudioOnInteract, { once: true });
+
+    // Hiệu ứng âm thanh que diêm
+    function playMatchStrikeSFX() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        const bufSize = ctx.sampleRate * 0.25;
+        const buf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < bufSize; i++) data[i] = Math.random() * 2 - 1;
+
+        const noise = ctx.createBufferSource();
+        noise.buffer = buf;
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'bandpass';
+        filter.frequency.setValueAtTime(1500, now);
+        filter.frequency.exponentialRampToValueAtTime(3200, now + 0.1);
+
+        const gain = ctx.createGain();
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.4, now + 0.03);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+
+        noise.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        noise.start(now);
+      } catch (e) { }
+    }
+
+    // Hiệu ứng âm thanh lắc ống xăm tre
+    function playBambooShakeSFX() {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+        for (let i = 0; i < 5; i++) {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(380 + Math.random() * 260, now + i * 0.16);
+
+          gain.gain.setValueAtTime(0, now + i * 0.16);
+          gain.gain.linearRampToValueAtTime(0.2, now + i * 0.16 + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + i * 0.16 + 0.11);
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now + i * 0.16);
+          osc.stop(now + i * 0.16 + 0.12);
+        }
+      } catch (e) { }
+    }
+
+    // ============================================================
+    // 3. LOGIC GIAO DIỆN & BỐC QUẺ
+    // ============================================================
+    const shakerBox = document.getElementById('shakerBox');
+    const fortuneOverlay = document.getElementById('fortuneOverlay');
+    let isDrawing = false;
+
+    function drawFortune() {
+      if (isDrawing) return;
+      isDrawing = true;
+      getAudioContext();
+      playBambooShakeSFX();
+
+      const btn = document.getElementById('fortuneBtn');
+      btn.innerText = "Đang Bốc Quẻ...";
+      shakerBox.classList.add('active');
+
+      setTimeout(() => {
+        shakerBox.classList.remove('active');
+        const q = fortuneData[Math.floor(Math.random() * fortuneData.length)];
+
+        document.getElementById('fTitle').innerText = q.title;
+        document.getElementById('fRank').innerText = q.rank;
+        document.getElementById('fPoem').innerText = q.poem;
+        document.getElementById('fHome').innerText = q.home;
+        document.getElementById('fWealth').innerText = q.wealth;
+        document.getElementById('fCareer').innerText = q.career;
+        document.getElementById('fLove').innerText = q.love;
+        document.getElementById('fAdvice').innerHTML = `<strong>Lời thầy bói luận:</strong> ${q.advice}`;
+
+        fortuneOverlay.classList.add('active');
+        btn.innerText = "Xin Xăm Bốc Quẻ";
+        isDrawing = false;
+      }, 1400);
+    }
+
+    function closeFortune() {
+      fortuneOverlay.classList.remove('active');
+    }
+
+    function closeOnBackdrop(e) {
+      if (e.target === fortuneOverlay) {
+        closeFortune();
+      }
+    }
+
+    // ============================================================
+    // 4. HIỆU ỨNG THẮP HƯƠNG (INCENSE OFFERING)
+    // ============================================================
+    let count = parseInt(localStorage.getItem('incense_count') || '0', 10);
+    document.getElementById('countDisplay').innerText = count;
+    let isOfferingBusy = false;
+    let isLit = false;
+    let offeringStartTime = 0;
+
+    function lightIncense() {
+      if (isOfferingBusy) return;
+      isOfferingBusy = true;
+
+      getAudioContext();
+      playMatchStrikeSFX();
+
+      const btn = document.getElementById('lightBtn');
+      btn.innerText = "Đang Dâng...";
+
+      const offeringEl = document.getElementById('offeringIncense');
+      offeringEl.classList.remove('offering-active');
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          offeringEl.classList.add('offering-active');
+          offeringStartTime = performance.now();
+        });
+      });
+
+      setTimeout(() => {
+        document.getElementById('s1').classList.add('active');
+        document.getElementById('s2').classList.add('active');
+        document.getElementById('s3').classList.add('active');
+        document.getElementById('glow').style.opacity = '1';
+        isLit = true;
+
+        count++;
+        localStorage.setItem('incense_count', count);
+        document.getElementById('countDisplay').innerText = count;
+        btn.innerText = "Khấn Nguyện...";
+      }, 2600);
+
+      setTimeout(() => {
+        btn.innerText = "Thắp Nén Tâm Hương";
+        isOfferingBusy = false;
+      }, 3600);
+    }
+
+    // ============================================================
+    // 5. HIỆU ỨNG KHÓI NHANG (SMOKE CANVAS ENGINE)
+    // ============================================================
+    const smokeCacheCanvas = document.createElement('canvas');
+    smokeCacheCanvas.width = 64;
+    smokeCacheCanvas.height = 64;
+    const sCacheCtx = smokeCacheCanvas.getContext('2d');
+    const grad = sCacheCtx.createRadialGradient(32, 32, 0, 32, 32, 32);
+    grad.addColorStop(0, 'rgba(235, 230, 220, 0.45)');
+    grad.addColorStop(0.5, 'rgba(195, 190, 180, 0.2)');
+    grad.addColorStop(1, 'rgba(195, 190, 180, 0)');
+    sCacheCtx.fillStyle = grad;
+    sCacheCtx.beginPath();
+    sCacheCtx.arc(32, 32, 32, 0, Math.PI * 2);
+    sCacheCtx.fill();
+
+    const canvas = document.getElementById('smokeCanvas');
+    const ctx = canvas.getContext('2d');
+    const smokeParticles = [];
+
+    class SmokeParticle {
+      constructor(x, y) {
+        this.x = x + (Math.random() - 0.5) * 4;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = -(Math.random() * 0.8 + 0.5);
+        this.size = Math.random() * 4 + 4;
+        this.maxSize = Math.random() * 22 + 16;
+        this.life = 0;
+        this.maxLife = Math.random() * 90 + 70;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.size += (this.maxSize - this.size) * 0.02;
+        this.life++;
+      }
+      draw() {
+        const alpha = Math.max(0, 1 - (this.life / this.maxLife));
+        ctx.globalAlpha = alpha;
+        ctx.drawImage(
+          smokeCacheCanvas,
+          this.x - this.size,
+          this.y - this.size,
+          this.size * 2,
+          this.size * 2
+        );
+      }
+    }
+
+    function renderSmoke() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (offeringStartTime > 0) {
+        const elapsed = (performance.now() - offeringStartTime) / 1000;
+        if (elapsed <= 3.2) {
+          let progress = elapsed / 3.2;
+          let tipY;
+          if (progress < 0.25) tipY = (canvas.height - 30) - (progress / 0.25) * 220;
+          else if (progress < 0.55) tipY = canvas.height - 250;
+          else tipY = (canvas.height - 250) + ((progress - 0.55) / 0.45) * 215;
+
+          if (smokeParticles.length < 50) {
+            smokeParticles.push(new SmokeParticle(canvas.width / 2, tipY));
+          }
+        } else {
+          offeringStartTime = 0;
+        }
+      }
+
+      if (isLit && smokeParticles.length < 45) {
+        if (Math.random() > 0.5) {
+          smokeParticles.push(new SmokeParticle(155, canvas.height - 20));
+          smokeParticles.push(new SmokeParticle(170, canvas.height - 35));
+          smokeParticles.push(new SmokeParticle(185, canvas.height - 20));
+        }
+      }
+
+      for (let i = smokeParticles.length - 1; i >= 0; i--) {
+        const p = smokeParticles[i];
+        p.update();
+        p.draw();
+        if (p.life >= p.maxLife) smokeParticles.splice(i, 1);
+      }
+      requestAnimationFrame(renderSmoke);
+    }
+    renderSmoke();
+
+    // ============================================================
+    // 6. CÁNH HOA ĐÀO RƠI & PHÉP THUẬT KHI CHẠM NHÂN VẬT
+    // ============================================================
+    const fxCanvas = document.getElementById('fxCanvas');
+    const fxCtx = fxCanvas.getContext('2d');
+    const pCanvas = document.getElementById('petalCanvas');
+    const pCtx = pCanvas.getContext('2d');
+
+    function resizeAllCanvases() {
+      fxCanvas.width = window.innerWidth;
+      fxCanvas.height = window.innerHeight;
+      pCanvas.width = window.innerWidth;
+      pCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeAllCanvases);
+    resizeAllCanvases();
+
+    const fxParticles = [];
+    class MagicParticle {
+      constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.size = Math.random() * 3 + 1.5;
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 3.5 + 1;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed;
+        this.life = Math.random() * 15 + 15;
+        this.maxLife = this.life;
+      }
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.life--;
+      }
+      draw() {
+        fxCtx.save();
+        fxCtx.globalAlpha = Math.max(0, this.life / this.maxLife);
+        fxCtx.fillStyle = this.color;
+        fxCtx.beginPath();
+        fxCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        fxCtx.fill();
+        fxCtx.restore();
+      }
+    }
+
+    function spawnSpellBurst(x, y, color) {
+      for (let i = 0; i < 20; i++) fxParticles.push(new MagicParticle(x, y, color));
+    }
+
+    function renderFX() {
+      fxCtx.clearRect(0, 0, fxCanvas.width, fxCanvas.height);
+      for (let i = fxParticles.length - 1; i >= 0; i--) {
+        const p = fxParticles[i];
+        p.update();
+        p.draw();
+        if (p.life <= 0) fxParticles.splice(i, 1);
+      }
+      requestAnimationFrame(renderFX);
+    }
+    renderFX();
+
+    const petals = [];
+    class Petal {
+      constructor() { this.reset(true); }
+      reset(init = false) {
+        this.x = Math.random() * pCanvas.width;
+        this.y = init ? Math.random() * pCanvas.height : -30;
+        this.w = Math.random() * 5 + 8;
+        this.h = this.w * 1.35;
+        this.speedY = Math.random() * 0.7 + 0.5;
+        this.speedX = Math.random() * 0.4 + 0.2;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotSpeed = (Math.random() - 0.5) * 0.02;
+        this.flipX = Math.random() * Math.PI;
+        this.swing = Math.random() * Math.PI * 2;
+        this.color = Math.random() > 0.5 ? 'rgba(255, 175, 195, 0.6)' : 'rgba(240, 140, 165, 0.6)';
+      }
+      update() {
+        this.swing += 0.02;
+        this.flipX += 0.02;
+        this.rotation += this.rotSpeed;
+        this.x += this.speedX + Math.sin(this.swing) * 0.5;
+        this.y += this.speedY;
+        if (this.y > pCanvas.height + 30 || this.x > pCanvas.width + 30) this.reset(false);
+      }
+      draw() {
+        pCtx.save();
+        pCtx.translate(this.x, this.y);
+        pCtx.rotate(this.rotation);
+        pCtx.scale(Math.cos(this.flipX), 1);
+        pCtx.fillStyle = this.color;
+        pCtx.beginPath();
+        pCtx.ellipse(0, 0, this.w / 2, this.h / 2, 0, 0, Math.PI * 2);
+        pCtx.fill();
+        pCtx.restore();
+      }
+    }
+    for (let i = 0; i < 22; i++) petals.push(new Petal());
+
+    function renderPetals() {
+      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height);
+      petals.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(renderPetals);
+    }
+    renderPetals();
+
+    function showMantra(x, y, text) {
+      const bubble = document.createElement('div');
+      bubble.className = 'mantra-bubble';
+      bubble.innerText = text;
+      bubble.style.left = (x - 40) + 'px';
+      bubble.style.top = (y - 30) + 'px';
+      document.body.appendChild(bubble);
+      setTimeout(() => bubble.remove(), 1400);
+    }
+
+    function getFigureCenter(el) {
+      const rect = el.getBoundingClientRect();
+      return { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    }
+
+    const mantras = [
+      { id: 'buddha', color: '#f1c40f', text: '卍 PHẬT QUANG PHỔ CHIẾU 卍' },
+      { id: 'guanyin', color: '#74b9ff', text: '💧 CAM LỘ TỊNH TÂM 💧' },
+      { id: 'jadeEmperor', color: '#f39c12', text: '👑 THIÊN ÂN BAN PHƯỚC 👑' },
+      { id: 'tripitaka', color: '#ffeaa7', text: '📿 A DI ĐÀ PHẬT 📿' },
+      { id: 'dragonHorse', color: '#81ecec', text: '⚡ LONG MÃ HÍ VANG ⚡' },
+      { id: 'wukong', color: '#e74c3c', text: '🐒 THIẾT BẢNG QUẦN MA 🐒' },
+      { id: 'bajie', color: '#fab1a0', text: '🐷 HỈ HẢ AN NHIÊN 🐷' },
+      { id: 'bullKing', color: '#a4b0be', text: '🐂 OAI PHONG LẪM LIỆT 🐂' },
+      { id: 'redBoy', color: '#ff4757', text: '🔥 TAM MUỘI CHÂN HỎA 🔥' }
+    ];
+
+    mantras.forEach(item => {
+      const el = document.getElementById(item.id);
+      if (el) {
+        el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          getAudioContext();
+          const pos = getFigureCenter(el);
+          spawnSpellBurst(pos.x, pos.y, item.color);
+          showMantra(pos.x, pos.y, item.text);
+        });
+      }
+    });
+  </script>
+</body>
+
+</html>
