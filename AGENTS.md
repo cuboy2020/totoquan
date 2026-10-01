@@ -8,15 +8,14 @@
 
 - **Core Theme:** Ứng dụng "Tờ Tờ Quán" mang phong cách tâm linh, thiền định, thiên đình cổ phong, trang nhã, thanh tịnh và huyền bí. Mục tiêu mang lại cảm giác an yên, lắng đọng cho người dùng qua các nghi thức dâng hương, lắng nghe thanh âm chuông xoay, bốc quẻ Kinh Dịch cầu may và chiêm bái chư vị thần tiên cõi trời.
 - **Current Architecture & Stack:**
-  - **Single-page High Performance Web App:** Tệp cốt lõi `thaphuong.html` kết hợp tài nguyên âm thanh `nhac.mp3`.
+  - **React 18 + Vite Modern Web App:** Ứng dụng xây dựng trên nền tảng React 18, Vite, TypeScript kết hợp tài nguyên âm thanh duy nhất `public/nhac.mp3`.
   - **Graphics & Motion:** HTML5 Canvas 2D Engine (3 canvas độc lập: khói nhang, cánh hoa đào, phép thuật), CSS3 Keyframe Animations, SVG Vector Graphics chi tiết cho 9 nhân vật thần tiên và cung điện thiên đình.
-  - **Audio System:** Web Audio API (hệ thống âm thanh kép: HTML5 Audio phát BGM và Web Audio Synthesizer tự tạo âm thanh chuông xoay, tiếng quẹt diêm, tiếng lắc ống xăm tre).
+  - **Audio System:** Web Audio API (hệ thống âm thanh kép: HTML5 Audio phát BGM từ `/nhac.mp3` và Web Audio Synthesizer tự tạo âm thanh chuông xoay, tiếng quẹt diêm, tiếng lắc ống xăm tre).
   - **Typography & Styling:** Google Fonts (`Cormorant Garamond`), Pure CSS với CSS Variables và hệ thống màu hoàng kim cổ phong.
-  - **Mở rộng (React 18 / Vite):** Khi di chuyển hoặc chia tách sang component React, giữ nguyên toàn bộ cơ chế rendering tối ưu của Canvas và Web Audio API.
 - **Vibe Coding Principles:**
   - **Bảo tồn tính mượt mà (60 FPS):** Giữ trải nghiệm hình ảnh mượt mà, huyền ảo, tôn nghiêm.
   - **Không gián đoạn trải nghiệm:** Ứng dụng phải luôn trong trạng thái chạy được (`runnable`) ngay sau mỗi lần chỉnh sửa.
-  - **Tôn trọng di sản mỹ thuật:** Giữ nguyên các hiệu ứng nguyên bản: bát hương dâng ngút ngàn, làn khói trầm uốn lượn, cánh hoa đào bay lượn trong gió, hào quang thiên đình và 9 nhân vật thần tiên ngao du cõi trời.
+  - **Tôn trọng di sản mỹ thuật:** Giữ nguyên các hiệu ứng nguyên bản: bát hương dâng ngút ngàn, làn khói trầm uốn lượn, cánh hoa đào bay lượn trong gió, hào quang thiên đình và 9 nhân vật thần tiên ngao du cõi trời được thiết kế chibi siêu dễ thương và hài hước.
 
 ---
 
@@ -25,8 +24,11 @@
 ```text
 to-to-quan/
 ├── AGENTS.md          # Bộ quy chuẩn kiến trúc và hướng dẫn phát triển cho Agent
-├── thaphuong.html     # Mã nguồn chính chứa UI, Canvas Loops, SVG thần tiên, Audio & Data Quẻ
-└── nhac.mp3           # Bản nhạc thiền định tịnh tâm làm nhạc nền chính (BGM)
+├── public/
+│   └── nhac.mp3       # File âm thanh duy nhất dùng làm nhạc nền chính (BGM)
+├── src/               # Mã nguồn React 18, Vite, Canvas 2D Loops, Chibi Figures & Data Quẻ
+├── index.html         # HTML entry point cho Vite
+└── package.json       # Cấu hình dependencies và build scripts
 ```
 
 ---
@@ -171,7 +173,7 @@ interface FortuneItem {
 ```
 
 ### Bộ Dữ Liệu Đầy Đủ: 64 Quẻ Kinh Dịch
-Hiện tại ứng dụng đã tích hợp đầy đủ trọn vẹn **64 quẻ thẻ Kinh Dịch** (từ Quẻ 01 *Càn Vi Thiên* đến Quẻ 64 *Hỏa Thủy Vị Tế*), đồng bộ cả ở phiên bản React 18/TypeScript (`src/constants/fortuneData.ts`) và phiên bản Single-file (`thaphuong.html`). Mọi quẻ thẻ đều có thơ thất ngôn tứ tuyệt chuẩn vần, luận giải chi tiết 4 khía cạnh (*Gia Đạo, Tài Lộc, Công Danh, Tình Duyên*) và lời khuyên tu tâm hướng thiện.
+Hiện tại ứng dụng đã tích hợp đầy đủ trọn vẹn **64 quẻ thẻ Kinh Dịch** (từ Quẻ 01 *Càn Vi Thiên* đến Quẻ 64 *Hỏa Thủy Vị Tế*) trong phiên bản React 18/TypeScript (`src/constants/fortuneData.ts`). Mọi quẻ thẻ đều có thơ thất ngôn tứ tuyệt chuẩn vần, luận giải chi tiết 4 khía cạnh (*Gia Đạo, Tài Lộc, Công Danh, Tình Duyên*) và lời khuyên tu tâm hướng thiện.
 
 ---
 
